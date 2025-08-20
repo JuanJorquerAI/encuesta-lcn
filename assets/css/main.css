@@ -11,8 +11,17 @@ nav a{margin-left:22px;color:var(--fg);text-decoration:none;opacity:.9;font-weig
 .logo:hover, .logo:focus{color:var(--primary)}
 nav a:hover, nav a:focus{color:var(--primary);opacity:1}
 .section{padding:32px 0}
-.hero{background:linear-gradient(135deg,rgba(197,48,48,0.1) 0%,rgba(197,48,48,0.05) 50%,#f8fafc 100%);border-bottom:1px solid rgba(197,48,48,0.2);padding:48px 0}
-.hero-title{margin:0 0 8px;font-size:clamp(28px,3.2vw,40px);line-height:1.2}
+.hero{
+  background:linear-gradient(135deg,var(--secondary) 0%,#1a202c 100%);
+  color:#fff;
+  border-bottom:1px solid rgba(197,48,48,0.3);
+  padding:48px 0;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+.hero-title{margin:0 0 8px;font-size:clamp(28px,3.2vw,40px);line-height:1.2;color:#fff}
+.hero .muted{color:#cbd5e0}
+.hero .atributos{color:#e2e8f0}
 .grid-cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:16px}
 .card{border:1px solid #e9edf5;border-radius:10px;padding:18px;background:#fff;box-shadow:0 1px 2px rgba(16,24,40,.04);transition:transform .18s ease,box-shadow .18s ease}
 .card:hover{transform:translateY(-2px);box-shadow:0 6px 16px rgba(16,24,40,.08)}

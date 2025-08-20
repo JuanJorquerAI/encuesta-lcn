@@ -12,6 +12,7 @@ destacado: true
 tags: [politica, opinion]
 youtube_ids: ["dQw4w9WgXcQ","Zx1nGx4vGzQ"]
 permalink: /encuestas/encuesta-actual-agosto-2025/
+image: "/assets/img/encuesta-actual-agosto-2025.jpg"
 ---
 
 Contenido opcional del detalle.
