@@ -1,0 +1,44 @@
+title: "Encuestas La Cosa Nostra"
+description: "Sitio institucional para publicar encuestas, histórico y videos."
+url: "" # Setear dominio de producción
+baseurl: "" # Subcarpeta si aplica
+lang: es
+permalink: pretty
+
+defaults:
+  - scope:
+      path: ""
+      type: "encuestas"
+    values:
+      layout: "encuesta"
+
+collections:
+  encuestas:
+    output: true
+    permalink: "/encuestas/:title/"
+
+plugins:
+  - jekyll-seo-tag
+  - jekyll-sitemap
+  - jekyll-feed
+  - jekyll-paginate-v2
+
+# jekyll-paginate-v2 para paginar colección encuestas
+pagination:
+  enabled: true
+  debug: false
+  per_page: 6
+  title: ":title"
+  sort_field: "date"
+  sort_reverse: true
+  # Paginación para una página específica del histórico
+  trail:
+    before: 2
+    after: 2
+
+# Datos del sitio
+social:
+  twitter: ""
+  linkedin: ""
+  facebook: ""
+  youtube: ""

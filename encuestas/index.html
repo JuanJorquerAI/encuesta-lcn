@@ -1,0 +1,27 @@
+---
+layout: default
+title: Encuestas
+pagination:
+  enabled: true
+  collection: encuestas
+  per_page: 9
+  sort_field: date
+  sort_reverse: true
+---
+<section class="section container">
+  <h1>Histórico de encuestas</h1>
+  <div class="grid-cards">
+    {% for e in paginator.docs %}
+      {% include card-encuesta.html encuesta=e %}
+    {% endfor %}
+  </div>
+  <nav class="pagination">
+    {% if paginator.previous_page %}
+      <a class="btn" href="{{ paginator.previous_page_path | relative_url }}">Página anterior</a>
+    {% endif %}
+    <span>Página {{ paginator.page }} de {{ paginator.total_pages }}</span>
+    {% if paginator.next_page %}
+      <a class="btn" href="{{ paginator.next_page_path | relative_url }}">Siguiente página</a>
+    {% endif %}
+  </nav>
+</section>

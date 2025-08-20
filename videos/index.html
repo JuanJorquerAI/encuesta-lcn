@@ -1,0 +1,18 @@
+---
+layout: default
+title: Videos
+---
+<section class="section container">
+  <h1>Videos</h1>
+  <div class="grid-videos">
+    {% assign vids = site.encuestas | map: "youtube_ids" | compact | uniq %}
+    {% comment %} Para demo, tomamos ids de las encuestas que los tengan {% endcomment %}
+    {% for encuesta in site.encuestas %}
+      {% if encuesta.youtube_ids %}
+        {% for id in encuesta.youtube_ids %}
+          {% include youtube.html id=id %}
+        {% endfor %}
+      {% endif %}
+    {% endfor %}
+  </div>
+</section>

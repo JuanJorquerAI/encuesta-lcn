@@ -1,0 +1,14 @@
+{% assign e = include.encuesta %}
+<article class="card">
+  <h3><a href="{{ e.url | relative_url }}">{{ e.title }}</a></h3>
+  <p class="muted">{{ e.date | date: "%Y-%m-%d" }}</p>
+  {% if e.atributos %}
+    <ul class="atributos">
+      {% for a in e.atributos limit:3 %}<li>{{ a }}</li>{% endfor %}
+    </ul>
+  {% endif %}
+  <div class="card-actions">
+    {% if e.pdf_url %}<a class="btn" href="{{ e.pdf_url | relative_url }}" target="_blank" rel="noopener">PDF</a>{% endif %}
+    <a class="link" href="{{ e.url | relative_url }}">Ver detalle</a>
+  </div>
+</article>

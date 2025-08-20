@@ -1,0 +1,27 @@
+---
+layout: default
+title: Inicio
+---
+{% assign destacadas = site.encuestas | where: "destacado", true | sort: "date" | reverse %}
+{% if destacadas.size > 0 %}
+  {% include hero-encuesta.html encuesta=destacadas.first %}
+{% else %}
+  {% assign ultima = site.encuestas | sort: "date" | last %}
+  {% if ultima %}
+    {% include hero-encuesta.html encuesta=ultima %}
+  {% endif %}
+{% endif %}
+
+<section class="section container">
+  <h2>Últimas encuestas</h2>
+  <div class="grid-cards">
+    {% assign ultimas = site.encuestas | sort: "date" | reverse | slice: 0, 6 %}
+    {% for e in ultimas %}
+      {% include card-encuesta.html encuesta=e %}
+    {% endfor %}
+  </div>
+</section>
+
+<section class="section container">
+  <p><a class="btn" href="{{ "/encuestas/" | relative_url }}">Ver histórico completo</a></p>
+</section>

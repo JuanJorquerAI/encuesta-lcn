@@ -1,0 +1,37 @@
+---
+layout: default
+---
+<article class="section container">
+  <header class="encuesta-header">
+    <h1>{{ page.title }}</h1>
+    <p class="muted">{{ page.date | date: "%-d de %B de %Y" }}</p>
+    {% if page.atributos %}
+      <ul class="atributos">
+        {% for a in page.atributos %}<li>{{ a }}</li>{% endfor %}
+      </ul>
+    {% endif %}
+    {% if page.pdf_url %}
+      <p><a class="btn" href="{{ page.pdf_url | relative_url }}" target="_blank" rel="noopener">Descargar PDF</a></p>
+    {% endif %}
+  </header>
+
+  {% if page.resumen %}
+    <section>
+      <h2>Resumen</h2>
+      <p>{{ page.resumen }}</p>
+    </section>
+  {% endif %}
+
+  {% if page.youtube_ids %}
+    <section>
+      <h2>Videos relacionados</h2>
+      <div class="grid-videos">
+        {% for id in page.youtube_ids %}
+          {% include youtube.html id=id %}
+        {% endfor %}
+      </div>
+    </section>
+  {% endif %}
+
+  {% include share.html %}
+</article>
