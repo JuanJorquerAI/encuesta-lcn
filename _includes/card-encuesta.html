@@ -1,14 +1,42 @@
 {% assign e = include.encuesta %}
-<article class="card border border-slate-200 rounded-xl p-5 bg-white shadow-sm hover:shadow-md transition-shadow">
-  <h3 class="text-lg font-semibold tracking-tight"><a class="text-slate-900 hover:text-primary transition-colors" href="{{ e.url | relative_url }}">{{ e.title }}</a></h3>
-  <p class="muted text-slate-500 text-sm mt-1">{{ e.date | date: "%Y-%m-%d" }}</p>
+<article class="survey-card">
+  <div class="survey-card-header">
+    <div class="survey-icon">📊</div>
+    <div class="survey-meta">
+      <h3 class="survey-title"><a href="{{ e.url | relative_url }}">{{ e.title }}</a></h3>
+      <p class="survey-date">📅 {{ e.date | date: "%d/%m/%Y" }}</p>
+    </div>
+  </div>
+  
   {% if e.atributos %}
-    <ul class="atributos mt-3 list-disc pl-5 text-slate-700 space-y-1">
-      {% for a in e.atributos limit:3 %}<li>{{ a }}</li>{% endfor %}
-    </ul>
+    <div class="survey-stats">
+      {% for a in e.atributos limit:3 %}
+        <div class="stat-item">
+          {% if a contains 'Muestra' %}
+            <span class="stat-icon">👥</span>
+          {% elsif a contains 'Margen' %}
+            <span class="stat-icon">📈</span>
+          {% elsif a contains 'Metodología' %}
+            <span class="stat-icon">🔬</span>
+          {% else %}
+            <span class="stat-icon">📋</span>
+          {% endif %}
+          <span class="stat-text">{{ a }}</span>
+        </div>
+      {% endfor %}
+    </div>
   {% endif %}
-  <div class="card-actions mt-4 flex items-center gap-3">
-    {% if e.pdf_url %}<a class="btn inline-block bg-primary text-white px-3 py-2 rounded-lg font-semibold shadow hover:brightness-110" href="{{ e.pdf_url | relative_url }}" target="_blank" rel="noopener">PDF</a>{% endif %}
-    <a class="link text-primary hover:underline" href="{{ e.url | relative_url }}">Ver detalle</a>
+  
+  <div class="survey-actions">
+    {% if e.pdf_url %}
+      <a class="btn-pdf" href="{{ e.pdf_url | relative_url }}" target="_blank" rel="noopener">
+        <span class="btn-icon">📄</span>
+        <span>PDF</span>
+      </a>
+    {% endif %}
+    <a class="btn-detail" href="{{ e.url | relative_url }}">
+      <span>Ver detalle</span>
+      <span class="btn-arrow">→</span>
+    </a>
   </div>
 </article>
