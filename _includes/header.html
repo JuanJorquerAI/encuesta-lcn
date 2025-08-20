@@ -1,12 +1,17 @@
 <header class="site-header">
   <div class="container nav">
-    <a class="logo" href="{{ "/" | relative_url }}">{{ site.title }}</a>
-    <nav>
-      <a href="{{ "/" | relative_url }}">Inicio</a>
-      <a href="{{ "/encuestas/" | relative_url }}">Encuestas</a>
-      <a href="{{ "/videos/" | relative_url }}">Videos</a>
-      <a href="{{ "/suscripcion/" | relative_url }}">Suscripción</a>
-      <a href="{{ "/about/" | relative_url }}">About</a>
+    <div class="logo-container">
+      <a class="logo" href="{{ "/" | relative_url }}">
+        <img src="{{ '/assets/img/LCN_logo_encuesta.png' | relative_url }}" alt="{{ site.title }}" />
+        <span class="sr-only">{{ site.title }}</span>
+      </a>
+    </div>
+    <nav class="py-2">
+      <a class="ml-6 text-slate-700 hover:text-primary transition-colors font-medium" href="{{ "/" | relative_url }}">Inicio</a>
+      <a class="ml-6 text-slate-700 hover:text-primary transition-colors font-medium" href="{{ "/encuestas/" | relative_url }}">Encuestas</a>
+      <a class="ml-6 text-slate-700 hover:text-primary transition-colors font-medium" href="{{ "/videos/" | relative_url }}">Videos</a>
+      <a class="ml-6 text-slate-700 hover:text-primary transition-colors font-medium" href="{{ "/suscripcion/" | relative_url }}">Suscripción</a>
+      <a class="ml-6 text-slate-700 hover:text-primary transition-colors font-medium" href="{{ "/about/" | relative_url }}">About</a>
     </nav>
   </div>
 </header>

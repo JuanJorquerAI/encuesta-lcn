@@ -4,6 +4,25 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>{% if page.title %}{{ page.title }} — {% endif %}{{ site.title }}</title>
+  <script>
+    window.tailwindConfig = {
+      theme: { 
+        extend: { 
+          colors: { 
+            primary: '#C53030',
+            secondary: '#2D3748',
+            accent: '#718096',
+            brand: {
+              red: '#C53030',
+              dark: '#2D3748',
+              gray: '#718096'
+            }
+          } 
+        } 
+      }
+    }
+  </script>
+  <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="{{ "/assets/css/main.css" | relative_url }}">
   {% seo %}
 </head>
