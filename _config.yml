@@ -29,8 +29,8 @@ pagination:
   debug: false
   collection: 'encuestas'
   per_page: 4
-  permalink: '/encuestas/page/:num/'
-  title: ':title - Página :num'
+  permalink: '/page/:num/'
+  title: ':title'
   limit: 0
   sort_field: 'date'
   sort_reverse: true
