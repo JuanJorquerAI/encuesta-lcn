@@ -27,11 +27,13 @@ plugins:
 pagination:
   enabled: true
   debug: false
-  per_page: 6
-  title: ":title"
-  sort_field: "date"
+  collection: 'encuestas'
+  per_page: 4
+  permalink: '/encuestas/page/:num/'
+  title: ':title - Página :num'
+  limit: 0
+  sort_field: 'date'
   sort_reverse: true
-  # Paginación para una página específica del histórico
   trail:
     before: 2
     after: 2

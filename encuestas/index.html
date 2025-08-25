@@ -91,49 +91,10 @@ permalink: /encuestas/
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
           </svg>
         </div>
-        <span class="text-2xl font-bold text-white block">{{ paginator.total_pages }}</span>
+        {% assign total_pages = site.encuestas.size | divided_by: 4 | plus: 1 %}
+        <span class="text-2xl font-bold text-white block">{{ total_pages }}</span>
         <span class="text-amber-200 text-sm">Páginas</span>
       </div>
-    </div>
-  </div>
-</section>
-
-<!-- Navegación de páginas superior -->
-<section class="py-8 bg-slate-50 border-b border-slate-200">
-  <div class="container max-w-6xl mx-auto px-6">
-    <div class="flex flex-col sm:flex-row items-center justify-between">
-      <!-- Información de página actual -->
-      <div class="flex items-center space-x-4 mb-4 sm:mb-0">
-        <div class="bg-white rounded-xl px-4 py-2 border border-slate-200 shadow-sm">
-          <span class="text-slate-600 text-sm">Página <span class="font-bold text-slate-900">{{ paginator.page }}</span> de <span class="font-bold">{{ paginator.total_pages }}</span></span>
-        </div>
-        <div class="bg-blue-50 rounded-xl px-4 py-2 border border-blue-200">
-          <span class="text-blue-700 text-sm font-medium">Mostrando 4 encuestas</span>
-        </div>
-      </div>
-
-      <!-- Paginación compacta superior -->
-      <nav class="flex items-center space-x-2">
-        {% if paginator.previous_page %}
-          <a href="{{ paginator.previous_page_path | relative_url }}" 
-             class="inline-flex items-center px-4 py-2 bg-white border border-slate-300 rounded-lg text-sm font-medium text-slate-700 hover:bg-slate-50 hover:border-slate-400 transition-all duration-200">
-            <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
-            </svg>
-            Anterior
-          </a>
-        {% endif %}
-
-        {% if paginator.next_page %}
-          <a href="{{ paginator.next_page_path | relative_url }}" 
-             class="inline-flex items-center px-4 py-2 bg-blue-600 border border-blue-600 rounded-lg text-sm font-medium text-white hover:bg-blue-700 transition-all duration-200">
-            Siguiente
-            <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
-            </svg>
-          </a>
-        {% endif %}
-      </nav>
     </div>
   </div>
 </section>
@@ -147,11 +108,49 @@ permalink: /encuestas/
   </div>
 
   <div class="container max-w-6xl mx-auto px-6 relative">
-    {% if paginator.docs.size > 0 %}
+    <!-- Navegación de páginas superior -->
+    <div class="flex flex-col sm:flex-row items-center justify-between mb-12">
+      {% if paginator.posts %}
+        <!-- Información de página actual -->
+        <div class="flex items-center space-x-4 mb-4 sm:mb-0">
+          <div class="bg-white rounded-xl px-4 py-2 border border-slate-200 shadow-sm">
+            <span class="text-slate-600 text-sm">Página <span class="font-bold text-slate-900">{{ paginator.page }}</span> de <span class="font-bold">{{ paginator.total_pages }}</span></span>
+          </div>
+          <div class="bg-blue-50 rounded-xl px-4 py-2 border border-blue-200">
+            <span class="text-blue-700 text-sm font-medium">Mostrando {{ paginator.posts.size }} encuestas</span>
+          </div>
+        </div>
+
+        <!-- Navegación compacta superior -->
+        <nav class="flex items-center space-x-2">
+          {% if paginator.previous_page %}
+            <a href="{{ paginator.previous_page_path | relative_url }}" 
+               class="inline-flex items-center px-4 py-2 bg-white border border-slate-300 rounded-lg text-sm font-medium text-slate-700 hover:bg-slate-50 hover:border-slate-400 transition-all duration-200">
+              <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+              </svg>
+              Anterior
+            </a>
+          {% endif %}
+
+          {% if paginator.next_page %}
+            <a href="{{ paginator.next_page_path | relative_url }}" 
+               class="inline-flex items-center px-4 py-2 bg-blue-600 border border-blue-600 rounded-lg text-sm font-medium text-white hover:bg-blue-700 transition-all duration-200">
+              Siguiente
+              <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+              </svg>
+            </a>
+          {% endif %}
+        </nav>
+      {% endif %}
+    </div>
+
+    {% if paginator.posts.size > 0 %}
       <!-- Grid responsivo de encuestas -->
       <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2">
-        {% for e in paginator.docs %}
-          {% include card-encuesta.html encuesta=e %}
+        {% for encuesta in paginator.posts %}
+          {% include card-encuesta.html encuesta=encuesta %}
         {% endfor %}
       </div>
 
@@ -165,29 +164,66 @@ permalink: /encuestas/
         </div>
       </div>
     {% else %}
-      <!-- Estado vacío -->
-      <div class="text-center py-16">
-        <div class="w-20 h-20 bg-slate-100 rounded-3xl flex items-center justify-center mx-auto mb-8">
-          <svg class="w-10 h-10 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
-          </svg>
+      <!-- Fallback: mostrar todas las encuestas si la paginación no funciona -->
+      {% assign todas_encuestas = site.encuestas | sort: 'date' | reverse %}
+      {% if todas_encuestas.size > 0 %}
+        <!-- Navegación simple sin paginación -->
+        <div class="text-center mb-12">
+          <div class="inline-flex items-center px-6 py-3 bg-blue-50 rounded-2xl border border-blue-200">
+            <span class="text-blue-700 font-medium">Mostrando todas las {{ todas_encuestas.size }} encuestas</span>
+          </div>
         </div>
-        <h3 class="text-2xl font-bold text-slate-900 mb-4">No hay encuestas disponibles</h3>
-        <p class="text-slate-600 max-w-md mx-auto">Parece que no se encontraron encuestas en esta página. Intenta navegar a otras páginas o volver al inicio.</p>
-      </div>
+
+        <!-- Grid de todas las encuestas -->
+        <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2">
+          {% for encuesta in todas_encuestas limit: 4 %}
+            {% include card-encuesta.html encuesta=encuesta %}
+          {% endfor %}
+        </div>
+
+        {% if todas_encuestas.size > 4 %}
+          <div class="mt-12 text-center">
+            <p class="text-slate-600 mb-4">Mostrando las 4 encuestas más recientes de {{ todas_encuestas.size }} disponibles</p>
+            <a href="/encuestas/" class="inline-flex items-center px-6 py-3 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition-colors">
+              Ver todas las encuestas
+            </a>
+          </div>
+        {% endif %}
+
+        <!-- Información adicional -->
+        <div class="mt-16 text-center">
+          <div class="inline-flex items-center px-6 py-3 bg-slate-100 rounded-2xl">
+            <svg class="w-5 h-5 mr-3 text-slate-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+            </svg>
+            <span class="text-slate-700 font-medium">Todas las encuestas incluyen PDFs descargables y análisis detallados</span>
+          </div>
+        </div>
+      {% else %}
+        <!-- Estado verdaderamente vacío -->
+        <div class="text-center py-16">
+          <div class="w-20 h-20 bg-slate-100 rounded-3xl flex items-center justify-center mx-auto mb-8">
+            <svg class="w-10 h-10 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
+            </svg>
+          </div>
+          <h3 class="text-2xl font-bold text-slate-900 mb-4">No hay encuestas disponibles</h3>
+          <p class="text-slate-600 max-w-md mx-auto">No se encontraron encuestas para mostrar. Por favor, contacta al administrador del sitio.</p>
+        </div>
+      {% endif %}
     {% endif %}
   </div>
 </section>
 
 <!-- Paginación principal -->
-{% if paginator.total_pages > 1 %}
+{% if paginator.posts and paginator.total_pages > 1 %}
 <section class="py-12 bg-white border-t border-slate-200">
   <div class="container max-w-4xl mx-auto px-6">
     <nav class="flex items-center justify-center">
       <div class="flex items-center space-x-2">
         <!-- Botón primera página -->
         {% if paginator.page > 2 %}
-          <a href="{{ site.paginate_path | replace: ':num', '1' | relative_url }}" 
+          <a href="{{ '/' | relative_url }}encuestas/" 
              class="inline-flex items-center justify-center w-10 h-10 rounded-lg border border-slate-300 text-slate-700 hover:bg-slate-50 hover:border-slate-400 transition-all duration-200">
             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 19l-7-7 7-7m8 14l-7-7 7-7"/>
@@ -227,7 +263,7 @@ permalink: /encuestas/
                 {{ page_num }}
               </a>
             {% else %}
-              <a href="{{ site.paginate_path | replace: ':num', page_num | relative_url }}" 
+              <a href="{{ '/' | relative_url }}encuestas/page/{{ page_num }}/" 
                  class="inline-flex items-center justify-center w-10 h-10 rounded-lg border border-slate-300 text-slate-700 hover:bg-slate-50 hover:border-slate-400 transition-all duration-200">
                 {{ page_num }}
               </a>
@@ -247,7 +283,7 @@ permalink: /encuestas/
 
         <!-- Botón última página -->
         {% if paginator.page < paginator.total_pages | minus: 1 %}
-          <a href="{{ site.paginate_path | replace: ':num', paginator.total_pages | relative_url }}" 
+          <a href="{{ '/' | relative_url }}encuestas/page/{{ paginator.total_pages }}/" 
              class="inline-flex items-center justify-center w-10 h-10 rounded-lg border border-slate-300 text-slate-700 hover:bg-slate-50 hover:border-slate-400 transition-all duration-200">
             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 5l7 7-7 7M5 5l7 7-7 7"/>
