@@ -1,9 +1,16 @@
 {% assign share_url = page.url | absolute_url %}
 {% assign share_title = page.title | uri_escape %}
-<div class="share">
-  <span>Compartir:</span>
-  <a href="https://twitter.com/intent/tweet?url={{ share_url }}&text={{ share_title }}" target="_blank" rel="noopener">X/Twitter</a>
-  <a href="https://www.facebook.com/sharer/sharer.php?u={{ share_url }}" target="_blank" rel="noopener">Facebook</a>
-  <a href="https://www.linkedin.com/sharing/share-offsite/?url={{ share_url }}" target="_blank" rel="noopener">LinkedIn</a>
-  <a href="https://api.whatsapp.com/send?text={{ share_title }}%20{{ share_url }}" target="_blank" rel="noopener">WhatsApp</a>
+<div class="share-buttons">
+  <a href="https://twitter.com/intent/tweet?url={{ share_url }}&text={{ share_title }}" class="share-btn twitter" target="_blank" rel="noopener" aria-label="Compartir en X/Twitter">
+    <i class="fa-brands fa-x-twitter"></i>
+  </a>
+  <a href="https://www.facebook.com/sharer/sharer.php?u={{ share_url }}" class="share-btn facebook" target="_blank" rel="noopener" aria-label="Compartir en Facebook">
+    <i class="fa-brands fa-facebook-f"></i>
+  </a>
+  <a href="https://www.linkedin.com/sharing/share-offsite/?url={{ share_url }}" class="share-btn linkedin" target="_blank" rel="noopener" aria-label="Compartir en LinkedIn">
+    <i class="fa-brands fa-linkedin-in"></i>
+  </a>
+  <a href="https://api.whatsapp.com/send?text={{ share_title }}%20{{ share_url }}" class="share-btn whatsapp" target="_blank" rel="noopener" aria-label="Compartir en WhatsApp">
+    <i class="fa-brands fa-whatsapp"></i>
+  </a>
 </div>

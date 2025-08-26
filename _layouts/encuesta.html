@@ -1,37 +1,52 @@
 ---
 layout: default
 ---
-<article class="section container">
-  <header class="encuesta-header">
-    <h1>{{ page.title }}</h1>
-    <p class="muted">{{ page.date | date: "%-d de %B de %Y" }}</p>
-    {% if page.atributos %}
-      <ul class="atributos">
-        {% for a in page.atributos %}<li>{{ a }}</li>{% endfor %}
-      </ul>
-    {% endif %}
-    {% if page.pdf_url %}
-      <p><a class="btn" href="{{ page.pdf_url | relative_url }}" target="_blank" rel="noopener">Descargar PDF</a></p>
-    {% endif %}
-  </header>
-
-  {% if page.resumen %}
-    <section>
-      <h2>Resumen</h2>
-      <p>{{ page.resumen }}</p>
-    </section>
-  {% endif %}
-
-  {% if page.youtube_ids %}
-    <section>
-      <h2>Videos relacionados</h2>
-      <div class="grid-videos">
-        {% for id in page.youtube_ids %}
-          {% include youtube.html id=id %}
-        {% endfor %}
+<article class="section container encuesta-detail">
+  <div class="encuesta-detail-body">
+    <div class="encuesta-main-content">
+      <div class="encuesta-detail-header">
+        <h1>{{ page.title }}</h1>
+        <p class="muted">{{ page.date | date: "%B %-d, %Y" }}</p>
       </div>
-    </section>
-  {% endif %}
 
-  {% include share.html %}
+      {% if page.resumen %}
+        <section class="encuesta-summary">
+          <h2>Resumen</h2>
+          <p>{{ page.resumen }}</p>
+        </section>
+      {% endif %}
+
+      {% if page.youtube_ids %}
+        <section class="encuesta-videos">
+          <h2>Videos relacionados</h2>
+          <div class="grid-videos">
+            {% for id in page.youtube_ids %}
+              {% include youtube.html id=id %}
+            {% endfor %}
+          </div>
+        </section>
+      {% endif %}
+    </div>
+
+    <aside class="encuesta-sidebar">
+      {% if page.atributos or page.pdf_url %}
+        <div class="card">
+          <h3>Ficha Técnica</h3>
+          {% if page.atributos %}
+            <ul class="atributos">
+              {% for a in page.atributos %}<li>{{ a }}</li>{% endfor %}
+            </ul>
+          {% endif %}
+          {% if page.pdf_url %}
+            <a class="btn btn-primary" href="{{ page.pdf_url | relative_url }}" target="_blank" rel="noopener">Descargar PDF</a>
+          {% endif %}
+        </div>
+      {% endif %}
+      
+      <div class="card share-card">
+        <h3>Compartir</h3>
+        {% include share.html %}
+      </div>
+    </aside>
+  </div>
 </article>
