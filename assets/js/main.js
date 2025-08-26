@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const submitButton = this.querySelector('button[type="submit"]');
       const scriptURL = 'https://script.google.com/macros/s/AKfycbwzAc2E8v-SeOxq_JcZvEcbeq-yZJU7bq1xuW-BdZ5FIknVpxmFXSJp9FdqKku2jMua/exec'; // <-- ¡IMPORTANTE! REEMPLAZA ESTA URL
 
-      if (!scriptURL || scriptURL === 'https://script.google.com/macros/s/AKfycbwzAc2E8v-SeOxq_JcZvEcbeq-yZJU7bq1xuW-BdZ5FIknVpxmFXSJp9FdqKku2jMua/exec') {
+      if (!scriptURL || scriptURL === 'TU_URL_DE_APPS_SCRIPT_AQUI') { // La comprobación original era correcta
         newsletterMessage.textContent = 'Error: La URL del script no está configurada.';
         newsletterMessage.className = 'newsletter-message error';
         return;
