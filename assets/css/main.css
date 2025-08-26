@@ -557,3 +557,28 @@ a:focus{outline:2px solid #c8d7ff;outline-offset:2px;border-radius:4px}
 .share-btn.facebook { background-color: #1877F2; }
 .share-btn.linkedin { background-color: #0A66C2; }
 .share-btn.whatsapp { background-color: #25D366; }
+
+/* Estilos para los mensajes del formulario de suscripción */
+.newsletter-message {
+  font-size: 0.9rem;
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+  margin-top: 12px;
+  text-align: center;
+  display: none; /* Oculto por defecto */
+  transition: all 0.3s ease;
+}
+
+.newsletter-message.success {
+  color: #155724;
+  background-color: #d4edda;
+  border: 1px solid #c3e6cb;
+  display: block;
+}
+
+.newsletter-message.error {
+  color: #721c24;
+  background-color: #f8d7da;
+  border: 1px solid #f5c6cb;
+  display: block;
+}
