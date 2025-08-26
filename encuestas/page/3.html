@@ -2,7 +2,6 @@
 layout: default
 title: Encuestas - Página 3
 permalink: /encuestas/page/3/
-pagina_actual: 3
 ---
 
 <!-- Incluir lógica de paginación -->
@@ -30,7 +29,7 @@ pagina_actual: 3
     </h1>
 
     <p class="text-lg text-blue-100/90 max-w-2xl mx-auto leading-relaxed">
-      Página 3 de {{ total_paginas }} - Encuestas ordenadas numéricamente
+      Página 3 de 7 - Encuestas ordenadas numéricamente
     </p>
   </div>
 </section>
@@ -42,10 +41,10 @@ pagina_actual: 3
     <div class="flex flex-col sm:flex-row items-center justify-between mb-8">
       <div class="flex items-center space-x-3 mb-4 sm:mb-0">
         <div class="bg-white rounded-lg px-3 py-2 border border-slate-200 shadow-sm">
-          <span class="text-slate-600 text-sm">Página <span class="font-bold text-slate-900">3</span> de <span class="font-bold">{{ total_paginas }}</span></span>
+          <span class="text-slate-600 text-sm">Página <span class="font-bold text-slate-900">3</span> de <span class="font-bold">7</span></span>
         </div>
         <div class="bg-blue-50 rounded-lg px-3 py-2 border border-blue-200">
-          <span class="text-blue-700 text-sm font-medium">{{ por_pagina }} encuestas</span>
+          <span class="text-blue-700 text-sm font-medium">4 encuestas</span>
         </div>
       </div>
 
@@ -68,9 +67,10 @@ pagina_actual: 3
       </nav>
     </div>
 
-    <!-- Grid responsivo MEJORADO -->
+    <!-- Grid responsivo MEJORADO - PÁGINA 3 (encuestas 9-12) -->
     <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-      {% for encuesta in todas_encuestas_ordenadas limit: por_pagina offset: inicio_index %}
+      {% assign encuestas_pagina_3 = todas_encuestas_ordenadas | slice: 8, 4 %}
+      {% for encuesta in encuestas_pagina_3 %}
         {% include card-encuesta.html encuesta=encuesta %}
       {% endfor %}
     </div>
@@ -78,4 +78,4 @@ pagina_actual: 3
 </section>
 
 <!-- Paginación principal -->
-{% include pagination-nav.html pagina_actual=3 total_paginas=total_paginas %}
+{% include pagination-nav.html pagina_actual=3 total_paginas=7 %>

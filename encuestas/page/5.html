@@ -29,7 +29,7 @@ permalink: /encuestas/page/5/
     </h1>
 
     <p class="text-lg text-blue-100/90 max-w-2xl mx-auto leading-relaxed">
-      Página 5 de {{ total_paginas }} - Encuestas ordenadas numéricamente
+      Página 5 de 7 - Encuestas ordenadas numéricamente
     </p>
   </div>
 </section>
@@ -41,10 +41,10 @@ permalink: /encuestas/page/5/
     <div class="flex flex-col sm:flex-row items-center justify-between mb-8">
       <div class="flex items-center space-x-3 mb-4 sm:mb-0">
         <div class="bg-white rounded-lg px-3 py-2 border border-slate-200 shadow-sm">
-          <span class="text-slate-600 text-sm">Página <span class="font-bold text-slate-900">5</span> de <span class="font-bold">{{ total_paginas }}</span></span>
+          <span class="text-slate-600 text-sm">Página <span class="font-bold text-slate-900">5</span> de <span class="font-bold">7</span></span>
         </div>
         <div class="bg-blue-50 rounded-lg px-3 py-2 border border-blue-200">
-          <span class="text-blue-700 text-sm font-medium">{{ por_pagina }} encuestas</span>
+          <span class="text-blue-700 text-sm font-medium">4 encuestas</span>
         </div>
       </div>
 
@@ -67,9 +67,10 @@ permalink: /encuestas/page/5/
       </nav>
     </div>
 
-    <!-- Grid responsivo MEJORADO -->
+    <!-- Grid responsivo MEJORADO - PÁGINA 5 (encuestas 17-20) -->
     <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-      {% for encuesta in todas_encuestas_ordenadas limit: por_pagina offset: inicio_index %}
+      {% assign encuestas_pagina_5 = todas_encuestas_ordenadas | slice: 16, 4 %}
+      {% for encuesta in encuestas_pagina_5 %}
         {% include card-encuesta.html encuesta=encuesta %}
       {% endfor %}
     </div>
@@ -77,4 +78,4 @@ permalink: /encuestas/page/5/
 </section>
 
 <!-- Paginación principal -->
-{% include pagination-nav.html pagina_actual=5 total_paginas=total_paginas %}
+{% include pagination-nav.html pagina_actual=5 total_paginas=7 %}

@@ -124,21 +124,20 @@ permalink: /encuestas/
 
       <!-- Navegación compacta superior -->
       <nav class="flex items-center space-x-2">
-        {% if pagina_actual < total_paginas %}
-          <a href="{{ '/encuestas/page/2/' | relative_url }}" 
-             class="inline-flex items-center px-4 py-2 bg-blue-600 border border-blue-600 rounded-lg text-sm font-medium text-white hover:bg-blue-700 transition-all duration-200">
-            Siguiente
-            <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
-            </svg>
-          </a>
-        {% endif %}
+        <a href="{{ '/encuestas/page/2/' | relative_url }}" 
+           class="inline-flex items-center px-4 py-2 bg-blue-600 border border-blue-600 rounded-lg text-sm font-medium text-white hover:bg-blue-700 transition-all duration-200">
+          Siguiente
+          <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+          </svg>
+        </a>
       </nav>
     </div>
 
-    <!-- Grid responsivo MEJORADO (más columnas, cards más pequeñas) -->
+    <!-- Grid responsivo MEJORADO - PÁGINA 1 (primeras 4 encuestas) -->
     <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-      {% for encuesta in todas_encuestas_ordenadas limit: por_pagina offset: inicio_index %}
+      {% assign encuestas_pagina_1 = todas_encuestas_ordenadas | slice: 0, 4 %}
+      {% for encuesta in encuestas_pagina_1 %}
         {% include card-encuesta.html encuesta=encuesta %}
       {% endfor %}
     </div>
@@ -156,4 +155,4 @@ permalink: /encuestas/
 </section>
 
 <!-- Paginación principal -->
-{% include pagination-nav.html pagina_actual=pagina_actual total_paginas=total_paginas %}
+{% include pagination-nav.html pagina_actual=1 total_paginas=7 %}
