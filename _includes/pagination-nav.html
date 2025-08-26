@@ -1,7 +1,6 @@
 {% comment %}
-=== NAVEGACIÓN DE PAGINACIÓN ESTÁTICA ===
-Genera navegación compatible con todos los sistemas de build
-Parámetros: pagina_actual, total_paginas
+=== NAVEGACIÓN DE PAGINACIÓN SIMPLIFICADA ===
+Versión simplificada y compatible para resolver problemas de build
 {% endcomment %}
 
 <section class="py-8 bg-white border-t border-slate-200">
@@ -9,45 +8,18 @@ Parámetros: pagina_actual, total_paginas
     <nav class="flex items-center justify-center">
       <div class="flex items-center space-x-1 sm:space-x-2">
         
-        <!-- Botón Anterior -->
-        {% if pagina_actual > 1 %}
-          {% if pagina_actual == 2 %}
+        <!-- Botón Anterior (simplificado) -->
+        {% assign anterior_pagina = pagina_actual | minus: 1 %}
+        {% if anterior_pagina > 0 %}
+          {% if anterior_pagina == 1 %}
             <a href="{{ '/encuestas/' | relative_url }}" 
                class="inline-flex items-center justify-center w-8 h-8 sm:w-10 sm:h-10 rounded-lg border border-slate-300 text-slate-700 hover:bg-slate-50 transition-all duration-200">
               <svg class="w-3 h-3 sm:w-4 sm:h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
               </svg>
             </a>
-          {% elsif pagina_actual == 3 %}
-            <a href="{{ '/encuestas/page/2/' | relative_url }}" 
-               class="inline-flex items-center justify-center w-8 h-8 sm:w-10 sm:h-10 rounded-lg border border-slate-300 text-slate-700 hover:bg-slate-50 transition-all duration-200">
-              <svg class="w-3 h-3 sm:w-4 sm:h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
-              </svg>
-            </a>
-          {% elsif pagina_actual == 4 %}
-            <a href="{{ '/encuestas/page/3/' | relative_url }}" 
-               class="inline-flex items-center justify-center w-8 h-8 sm:w-10 sm:h-10 rounded-lg border border-slate-300 text-slate-700 hover:bg-slate-50 transition-all duration-200">
-              <svg class="w-3 h-3 sm:w-4 sm:h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
-              </svg>
-            </a>
-          {% elsif pagina_actual == 5 %}
-            <a href="{{ '/encuestas/page/4/' | relative_url }}" 
-               class="inline-flex items-center justify-center w-8 h-8 sm:w-10 sm:h-10 rounded-lg border border-slate-300 text-slate-700 hover:bg-slate-50 transition-all duration-200">
-              <svg class="w-3 h-3 sm:w-4 sm:h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
-              </svg>
-            </a>
-          {% elsif pagina_actual == 6 %}
-            <a href="{{ '/encuestas/page/5/' | relative_url }}" 
-               class="inline-flex items-center justify-center w-8 h-8 sm:w-10 sm:h-10 rounded-lg border border-slate-300 text-slate-700 hover:bg-slate-50 transition-all duration-200">
-              <svg class="w-3 h-3 sm:w-4 sm:h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
-              </svg>
-            </a>
-          {% elsif pagina_actual == 7 %}
-            <a href="{{ '/encuestas/page/6/' | relative_url }}" 
+          {% else %}
+            <a href="/encuestas/page/{{ anterior_pagina }}/" 
                class="inline-flex items-center justify-center w-8 h-8 sm:w-10 sm:h-10 rounded-lg border border-slate-300 text-slate-700 hover:bg-slate-50 transition-all duration-200">
               <svg class="w-3 h-3 sm:w-4 sm:h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
@@ -58,133 +30,62 @@ Parámetros: pagina_actual, total_paginas
 
         <!-- Página 1 -->
         {% if pagina_actual == 1 %}
-          <span class="inline-flex items-center justify-center w-8 h-8 sm:w-10 sm:h-10 rounded-lg bg-blue-600 text-white font-semibold shadow-lg text-xs sm:text-sm">
-            1
-          </span>
+          <span class="inline-flex items-center justify-center w-8 h-8 sm:w-10 sm:h-10 rounded-lg bg-blue-600 text-white font-semibold shadow-lg text-xs sm:text-sm">1</span>
         {% else %}
-          <a href="{{ '/encuestas/' | relative_url }}" 
-             class="inline-flex items-center justify-center w-8 h-8 sm:w-10 sm:h-10 rounded-lg border border-slate-300 text-slate-700 hover:bg-slate-50 transition-all duration-200 text-xs sm:text-sm">
-            1
-          </a>
+          <a href="{{ '/encuestas/' | relative_url }}" class="inline-flex items-center justify-center w-8 h-8 sm:w-10 sm:h-10 rounded-lg border border-slate-300 text-slate-700 hover:bg-slate-50 transition-all duration-200 text-xs sm:text-sm">1</a>
         {% endif %}
 
         <!-- Página 2 -->
         {% if pagina_actual == 2 %}
-          <span class="inline-flex items-center justify-center w-8 h-8 sm:w-10 sm:h-10 rounded-lg bg-blue-600 text-white font-semibold shadow-lg text-xs sm:text-sm">
-            2
-          </span>
+          <span class="inline-flex items-center justify-center w-8 h-8 sm:w-10 sm:h-10 rounded-lg bg-blue-600 text-white font-semibold shadow-lg text-xs sm:text-sm">2</span>
         {% else %}
-          <a href="{{ '/encuestas/page/2/' | relative_url }}" 
-             class="inline-flex items-center justify-center w-8 h-8 sm:w-10 sm:h-10 rounded-lg border border-slate-300 text-slate-700 hover:bg-slate-50 transition-all duration-200 text-xs sm:text-sm">
-            2
-          </a>
+          <a href="/encuestas/page/2/" class="inline-flex items-center justify-center w-8 h-8 sm:w-10 sm:h-10 rounded-lg border border-slate-300 text-slate-700 hover:bg-slate-50 transition-all duration-200 text-xs sm:text-sm">2</a>
         {% endif %}
 
         <!-- Página 3 -->
         {% if pagina_actual == 3 %}
-          <span class="inline-flex items-center justify-center w-8 h-8 sm:w-10 sm:h-10 rounded-lg bg-blue-600 text-white font-semibold shadow-lg text-xs sm:text-sm">
-            3
-          </span>
+          <span class="inline-flex items-center justify-center w-8 h-8 sm:w-10 sm:h-10 rounded-lg bg-blue-600 text-white font-semibold shadow-lg text-xs sm:text-sm">3</span>
         {% else %}
-          <a href="{{ '/encuestas/page/3/' | relative_url }}" 
-             class="inline-flex items-center justify-center w-8 h-8 sm:w-10 sm:h-10 rounded-lg border border-slate-300 text-slate-700 hover:bg-slate-50 transition-all duration-200 text-xs sm:text-sm">
-            3
-          </a>
+          <a href="/encuestas/page/3/" class="inline-flex items-center justify-center w-8 h-8 sm:w-10 sm:h-10 rounded-lg border border-slate-300 text-slate-700 hover:bg-slate-50 transition-all duration-200 text-xs sm:text-sm">3</a>
         {% endif %}
 
         <!-- Página 4 -->
         {% if pagina_actual == 4 %}
-          <span class="inline-flex items-center justify-center w-8 h-8 sm:w-10 sm:h-10 rounded-lg bg-blue-600 text-white font-semibold shadow-lg text-xs sm:text-sm">
-            4
-          </span>
+          <span class="inline-flex items-center justify-center w-8 h-8 sm:w-10 sm:h-10 rounded-lg bg-blue-600 text-white font-semibold shadow-lg text-xs sm:text-sm">4</span>
         {% else %}
-          <a href="{{ '/encuestas/page/4/' | relative_url }}" 
-             class="inline-flex items-center justify-center w-8 h-8 sm:w-10 sm:h-10 rounded-lg border border-slate-300 text-slate-700 hover:bg-slate-50 transition-all duration-200 text-xs sm:text-sm">
-            4
-          </a>
+          <a href="/encuestas/page/4/" class="inline-flex items-center justify-center w-8 h-8 sm:w-10 sm:h-10 rounded-lg border border-slate-300 text-slate-700 hover:bg-slate-50 transition-all duration-200 text-xs sm:text-sm">4</a>
         {% endif %}
 
         <!-- Página 5 -->
         {% if pagina_actual == 5 %}
-          <span class="inline-flex items-center justify-center w-8 h-8 sm:w-10 sm:h-10 rounded-lg bg-blue-600 text-white font-semibold shadow-lg text-xs sm:text-sm">
-            5
-          </span>
+          <span class="inline-flex items-center justify-center w-8 h-8 sm:w-10 sm:h-10 rounded-lg bg-blue-600 text-white font-semibold shadow-lg text-xs sm:text-sm">5</span>
         {% else %}
-          <a href="{{ '/encuestas/page/5/' | relative_url }}" 
-             class="inline-flex items-center justify-center w-8 h-8 sm:w-10 sm:h-10 rounded-lg border border-slate-300 text-slate-700 hover:bg-slate-50 transition-all duration-200 text-xs sm:text-sm">
-            5
-          </a>
+          <a href="/encuestas/page/5/" class="inline-flex items-center justify-center w-8 h-8 sm:w-10 sm:h-10 rounded-lg border border-slate-300 text-slate-700 hover:bg-slate-50 transition-all duration-200 text-xs sm:text-sm">5</a>
         {% endif %}
 
         <!-- Página 6 -->
         {% if pagina_actual == 6 %}
-          <span class="inline-flex items-center justify-center w-8 h-8 sm:w-10 sm:h-10 rounded-lg bg-blue-600 text-white font-semibold shadow-lg text-xs sm:text-sm">
-            6
-          </span>
+          <span class="inline-flex items-center justify-center w-8 h-8 sm:w-10 sm:h-10 rounded-lg bg-blue-600 text-white font-semibold shadow-lg text-xs sm:text-sm">6</span>
         {% else %}
-          <a href="{{ '/encuestas/page/6/' | relative_url }}" 
-             class="inline-flex items-center justify-center w-8 h-8 sm:w-10 sm:h-10 rounded-lg border border-slate-300 text-slate-700 hover:bg-slate-50 transition-all duration-200 text-xs sm:text-sm">
-            6
-          </a>
+          <a href="/encuestas/page/6/" class="inline-flex items-center justify-center w-8 h-8 sm:w-10 sm:h-10 rounded-lg border border-slate-300 text-slate-700 hover:bg-slate-50 transition-all duration-200 text-xs sm:text-sm">6</a>
         {% endif %}
 
         <!-- Página 7 -->
         {% if pagina_actual == 7 %}
-          <span class="inline-flex items-center justify-center w-8 h-8 sm:w-10 sm:h-10 rounded-lg bg-blue-600 text-white font-semibold shadow-lg text-xs sm:text-sm">
-            7
-          </span>
+          <span class="inline-flex items-center justify-center w-8 h-8 sm:w-10 sm:h-10 rounded-lg bg-blue-600 text-white font-semibold shadow-lg text-xs sm:text-sm">7</span>
         {% else %}
-          <a href="{{ '/encuestas/page/7/' | relative_url }}" 
-             class="inline-flex items-center justify-center w-8 h-8 sm:w-10 sm:h-10 rounded-lg border border-slate-300 text-slate-700 hover:bg-slate-50 transition-all duration-200 text-xs sm:text-sm">
-            7
-          </a>
+          <a href="/encuestas/page/7/" class="inline-flex items-center justify-center w-8 h-8 sm:w-10 sm:h-10 rounded-lg border border-slate-300 text-slate-700 hover:bg-slate-50 transition-all duration-200 text-xs sm:text-sm">7</a>
         {% endif %}
 
-        <!-- Botón Siguiente -->
-        {% if pagina_actual < 7 %}
-          {% if pagina_actual == 1 %}
-            <a href="{{ '/encuestas/page/2/' | relative_url }}" 
-               class="inline-flex items-center justify-center w-8 h-8 sm:w-10 sm:h-10 rounded-lg border border-slate-300 text-slate-700 hover:bg-slate-50 transition-all duration-200">
-              <svg class="w-3 h-3 sm:w-4 sm:h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
-              </svg>
-            </a>
-          {% elsif pagina_actual == 2 %}
-            <a href="{{ '/encuestas/page/3/' | relative_url }}" 
-               class="inline-flex items-center justify-center w-8 h-8 sm:w-10 sm:h-10 rounded-lg border border-slate-300 text-slate-700 hover:bg-slate-50 transition-all duration-200">
-              <svg class="w-3 h-3 sm:w-4 sm:h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
-              </svg>
-            </a>
-          {% elsif pagina_actual == 3 %}
-            <a href="{{ '/encuestas/page/4/' | relative_url }}" 
-               class="inline-flex items-center justify-center w-8 h-8 sm:w-10 sm:h-10 rounded-lg border border-slate-300 text-slate-700 hover:bg-slate-50 transition-all duration-200">
-              <svg class="w-3 h-3 sm:w-4 sm:h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
-              </svg>
-            </a>
-          {% elsif pagina_actual == 4 %}
-            <a href="{{ '/encuestas/page/5/' | relative_url }}" 
-               class="inline-flex items-center justify-center w-8 h-8 sm:w-10 sm:h-10 rounded-lg border border-slate-300 text-slate-700 hover:bg-slate-50 transition-all duration-200">
-              <svg class="w-3 h-3 sm:w-4 sm:h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
-              </svg>
-            </a>
-          {% elsif pagina_actual == 5 %}
-            <a href="{{ '/encuestas/page/6/' | relative_url }}" 
-               class="inline-flex items-center justify-center w-8 h-8 sm:w-10 sm:h-10 rounded-lg border border-slate-300 text-slate-700 hover:bg-slate-50 transition-all duration-200">
-              <svg class="w-3 h-3 sm:w-4 sm:h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
-              </svg>
-            </a>
-          {% elsif pagina_actual == 6 %}
-            <a href="{{ '/encuestas/page/7/' | relative_url }}" 
-               class="inline-flex items-center justify-center w-8 h-8 sm:w-10 sm:h-10 rounded-lg border border-slate-300 text-slate-700 hover:bg-slate-50 transition-all duration-200">
-              <svg class="w-3 h-3 sm:w-4 sm:h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
-              </svg>
-            </a>
-          {% endif %}
+        <!-- Botón Siguiente (simplificado) -->
+        {% assign siguiente_pagina = pagina_actual | plus: 1 %}
+        {% if siguiente_pagina <= 7 %}
+          <a href="/encuestas/page/{{ siguiente_pagina }}/" 
+             class="inline-flex items-center justify-center w-8 h-8 sm:w-10 sm:h-10 rounded-lg border border-slate-300 text-slate-700 hover:bg-slate-50 transition-all duration-200">
+            <svg class="w-3 h-3 sm:w-4 sm:h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+            </svg>
+          </a>
         {% endif %}
       </div>
     </nav>
