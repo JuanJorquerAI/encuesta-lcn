@@ -4,7 +4,89 @@ title: Encuestas - Página 5
 permalink: /encuestas/page/5/
 ---
 
-{% assign todas_encuestas_ordenadas = site.encuestas | sort: 'date' | reverse %}
+<!-- Sistema de ordenamiento numérico (IGUAL que index.html) -->
+{% assign todas_encuestas = site.encuestas %}
+{% assign encuestas_numeradas = "" | split: "" %}
+
+{% for encuesta in todas_encuestas %}
+  {% assign titulo = encuesta.title %}
+  {% assign numero_extraido = "" %}
+  
+  {% comment %}Extraer número de encuesta del título{% endcomment %}
+  {% if titulo contains "28ª" or titulo contains "28°" %}
+    {% assign numero_extraido = "28" %}
+  {% elsif titulo contains "27ª" or titulo contains "27°" %}
+    {% assign numero_extraido = "27" %}
+  {% elsif titulo contains "26ª" or titulo contains "26°" %}
+    {% assign numero_extraido = "26" %}
+  {% elsif titulo contains "25ª" or titulo contains "25°" %}
+    {% assign numero_extraido = "25" %}
+  {% elsif titulo contains "24ª" or titulo contains "24°" %}
+    {% assign numero_extraido = "24" %}
+  {% elsif titulo contains "23ª" or titulo contains "23°" %}
+    {% assign numero_extraido = "23" %}
+  {% elsif titulo contains "22ª" or titulo contains "22°" %}
+    {% assign numero_extraido = "22" %}
+  {% elsif titulo contains "21ª" or titulo contains "21°" %}
+    {% assign numero_extraido = "21" %}
+  {% elsif titulo contains "20ª" or titulo contains "20°" %}
+    {% assign numero_extraido = "20" %}
+  {% elsif titulo contains "19ª" or titulo contains "19°" %}
+    {% assign numero_extraido = "19" %}
+  {% elsif titulo contains "18ª" or titulo contains "18°" %}
+    {% assign numero_extraido = "18" %}
+  {% elsif titulo contains "17ª" or titulo contains "17°" or titulo contains "Especial" %}
+    {% assign numero_extraido = "17" %}
+  {% elsif titulo contains "16ª" or titulo contains "16°" %}
+    {% assign numero_extraido = "16" %}
+  {% elsif titulo contains "15ª" or titulo contains "15°" %}
+    {% assign numero_extraido = "15" %}
+  {% elsif titulo contains "14ª" or titulo contains "14°" %}
+    {% assign numero_extraido = "14" %}
+  {% elsif titulo contains "13ª" or titulo contains "13°" %}
+    {% assign numero_extraido = "13" %}
+  {% elsif titulo contains "12ª" or titulo contains "12°" %}
+    {% assign numero_extraido = "12" %}
+  {% elsif titulo contains "11ª" or titulo contains "11°" %}
+    {% assign numero_extraido = "11" %}
+  {% elsif titulo contains "10ª" or titulo contains "10°" %}
+    {% assign numero_extraido = "10" %}
+  {% elsif titulo contains "9ª" or titulo contains "9°" %}
+    {% assign numero_extraido = "09" %}
+  {% elsif titulo contains "8ª" or titulo contains "8°" %}
+    {% assign numero_extraido = "08" %}
+  {% elsif titulo contains "7ª" or titulo contains "7°" %}
+    {% assign numero_extraido = "07" %}
+  {% elsif titulo contains "6ª" or titulo contains "6°" %}
+    {% assign numero_extraido = "06" %}
+  {% elsif titulo contains "5ª" or titulo contains "5°" %}
+    {% assign numero_extraido = "05" %}
+  {% elsif titulo contains "4ª" or titulo contains "4°" %}
+    {% assign numero_extraido = "04" %}
+  {% elsif titulo contains "3ª" or titulo contains "3°" %}
+    {% assign numero_extraido = "03" %}
+  {% elsif titulo contains "2ª" or titulo contains "2°" %}
+    {% assign numero_extraido = "02" %}
+  {% elsif titulo contains "1ª" or titulo contains "1°" %}
+    {% assign numero_extraido = "01" %}
+  {% else %}
+    {% assign numero_extraido = "00" %}
+  {% endif %}
+  
+  {% assign encuesta_con_numero = numero_extraido | append: "|" | append: forloop.index0 %}
+  {% assign encuestas_numeradas = encuestas_numeradas | push: encuesta_con_numero %}
+{% endfor %}
+
+{% assign encuestas_numeradas_ordenadas = encuestas_numeradas | sort | reverse %}
+{% assign todas_encuestas_ordenadas = "" | split: "" %}
+
+{% for item in encuestas_numeradas_ordenadas %}
+  {% assign partes = item | split: "|" %}
+  {% assign indice = partes[1] | plus: 0 %}
+  {% assign encuesta = todas_encuestas[indice] %}
+  {% assign todas_encuestas_ordenadas = todas_encuestas_ordenadas | push: encuesta %}
+{% endfor %}
+
 {% assign pagina_actual = 5 %}
 {% assign por_pagina = 4 %}
 {% assign total_encuestas = todas_encuestas_ordenadas.size %}
@@ -31,6 +113,10 @@ permalink: /encuestas/page/5/
         Histórico de Encuestas - Página {{ pagina_actual }}
       </span>
     </h1>
+
+    <p class="text-xl text-blue-100/90 max-w-3xl mx-auto leading-relaxed mb-8">
+      Página {{ pagina_actual }} de {{ total_paginas }} - Encuestas ordenadas numéricamente
+    </p>
   </div>
 </section>
 
@@ -43,6 +129,9 @@ permalink: /encuestas/page/5/
         <div class="bg-white rounded-xl px-4 py-2 border border-slate-200 shadow-sm">
           <span class="text-slate-600 text-sm">Página <span class="font-bold text-slate-900">{{ pagina_actual }}</span> de <span class="font-bold">{{ total_paginas }}</span></span>
         </div>
+        <div class="bg-blue-50 rounded-xl px-4 py-2 border border-blue-200">
+          <span class="text-blue-700 text-sm font-medium">Mostrando 4 encuestas</span>
+        </div>
       </div>
 
       <nav class="flex items-center space-x-2">
@@ -54,19 +143,17 @@ permalink: /encuestas/page/5/
           Anterior
         </a>
 
-        {% if pagina_actual < total_paginas %}
-          <a href="{{ '/encuestas/page/6/' | relative_url }}" 
-             class="inline-flex items-center px-4 py-2 bg-blue-600 border border-blue-600 rounded-lg text-sm font-medium text-white hover:bg-blue-700 transition-all duration-200">
-            Siguiente
-            <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
-            </svg>
-          </a>
-        {% endif %}
+        <a href="{{ '/encuestas/page/6/' | relative_url }}" 
+           class="inline-flex items-center px-4 py-2 bg-blue-600 border border-blue-600 rounded-lg text-sm font-medium text-white hover:bg-blue-700 transition-all duration-200">
+          Siguiente
+          <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+          </svg>
+        </a>
       </nav>
     </div>
 
-    <!-- Grid de encuestas ordenadas -->
+    <!-- Grid de encuestas ordenadas numéricamente -->
     <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2">
       {% for encuesta in todas_encuestas_ordenadas limit: 4 offset: inicio_index %}
         {% include card-encuesta.html encuesta=encuesta %}
@@ -80,12 +167,12 @@ permalink: /encuestas/page/5/
   <div class="container max-w-4xl mx-auto px-6">
     <nav class="flex items-center justify-center">
       <div class="flex items-center space-x-2">
+        <a href="{{ '/encuestas/' | relative_url }}" class="inline-flex items-center justify-center w-10 h-10 rounded-lg border border-slate-300 text-slate-700 hover:bg-slate-50 transition-all duration-200">1</a>
         <a href="{{ '/encuestas/page/3/' | relative_url }}" class="inline-flex items-center justify-center w-10 h-10 rounded-lg border border-slate-300 text-slate-700 hover:bg-slate-50 transition-all duration-200">3</a>
         <a href="{{ '/encuestas/page/4/' | relative_url }}" class="inline-flex items-center justify-center w-10 h-10 rounded-lg border border-slate-300 text-slate-700 hover:bg-slate-50 transition-all duration-200">4</a>
         <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-blue-600 text-white font-semibold shadow-lg">5</span>
-        {% for num_pagina in (6..total_paginas) %}
-          <a href="{{ '/encuestas/page/' | append: num_pagina | append: '/' | relative_url }}" class="inline-flex items-center justify-center w-10 h-10 rounded-lg border border-slate-300 text-slate-700 hover:bg-slate-50 transition-all duration-200">{{ num_pagina }}</a>
-        {% endfor %}
+        <a href="{{ '/encuestas/page/6/' | relative_url }}" class="inline-flex items-center justify-center w-10 h-10 rounded-lg border border-slate-300 text-slate-700 hover:bg-slate-50 transition-all duration-200">6</a>
+        <a href="{{ '/encuestas/page/7/' | relative_url }}" class="inline-flex items-center justify-center w-10 h-10 rounded-lg border border-slate-300 text-slate-700 hover:bg-slate-50 transition-all duration-200">7</a>
       </div>
     </nav>
   </div>
