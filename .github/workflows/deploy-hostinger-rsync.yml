@@ -32,4 +32,4 @@ jobs:
         
     - name: Desplegar en Hostinger vía Rsync
       run: |
-        rsync -avz --delete -e "ssh -p 65002 -o StrictHostKeyChecking=no" ./_site/ ${{ secrets.HOSTINGER_SSH_USER }}@${{ secrets.HOSTINGER_SSH_HOST }}:${{ secrets.HOSTINGER_REMOTE_PATH }}
+        rsync -avz --delete -e "ssh -vvv -p 65002 -o StrictHostKeyChecking=no" ./_site/ ${{ secrets.HOSTINGER_SSH_USER }}@${{ secrets.HOSTINGER_SSH_HOST }}:${{ secrets.HOSTINGER_REMOTE_PATH }}
