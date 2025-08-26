@@ -1,0 +1,36 @@
+name: Deploy to Hostinger via SSH/Rsync
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+      
+    - name: Setup Ruby
+      uses: ruby/setup-ruby@v1
+      with:
+        ruby-version: '3.1'
+        bundler-cache: true
+        
+    - name: Build Jekyll site
+      run: |
+        bundle exec jekyll build
+        
+    - name: Setup SSH
+      uses: webfactory/ssh-agent@v0.8.0
+      with:
+        ssh-private-key: ${{ secrets.HOSTINGER_SSH_KEY }}
+        
+    - name: Deploy to Hostinger via Rsync
+      run: |
+        rsync -avz --delete \
+          -e "ssh -o StrictHostKeyChecking=no" \
+          ./_site/ \
+          ${{ secrets.HOSTINGER_SSH_USER }}@${{ secrets.HOSTINGER_SSH_HOST }}:/home/${{ secrets.HOSTINGER_SSH_USER }}/public_html/
