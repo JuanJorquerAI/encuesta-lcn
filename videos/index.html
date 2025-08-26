@@ -5,6 +5,8 @@ title: Videos
 <section class="section container">
   <h1>Videos</h1>
   <div class="grid-videos">
+    {% include youtube.html id='wTUe_S7y-r8' %}
+    {% include youtube.html id='usL0pctIyGE' %}
     {% assign vids = site.encuestas | map: "youtube_ids" | compact | uniq %}
     {% comment %} Para demo, tomamos ids de las encuestas que los tengan {% endcomment %}
     {% for encuesta in site.encuestas %}
