@@ -1,0 +1,81 @@
+---
+layout: default
+title: Página No Encontrada
+permalink: /404.html
+---
+
+<section class="min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-50 to-slate-100 relative overflow-hidden">
+  <!-- Efectos de fondo -->
+  <div class="absolute inset-0">
+    <div class="absolute top-20 left-20 w-64 h-64 bg-blue-500/5 rounded-full blur-3xl"></div>
+    <div class="absolute bottom-20 right-20 w-80 h-80 bg-slate-600/5 rounded-full blur-3xl"></div>
+  </div>
+
+  <div class="container max-w-2xl mx-auto px-6 text-center relative z-10">
+    <!-- Icono de error -->
+    <div class="w-24 h-24 bg-red-100 rounded-3xl flex items-center justify-center mx-auto mb-8 border border-red-200">
+      <svg class="w-12 h-12 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L3.732 16.5c-.77.833.192 2.5 1.732 2.5z"/>
+      </svg>
+    </div>
+
+    <!-- Título -->
+    <h1 class="text-4xl md:text-5xl font-black tracking-tight mb-6">
+      <span class="bg-gradient-to-r from-slate-800 via-red-600 to-slate-800 bg-clip-text text-transparent">
+        Página No Encontrada
+      </span>
+    </h1>
+
+    <!-- Descripción -->
+    <p class="text-xl text-slate-600 max-w-lg mx-auto leading-relaxed mb-8">
+      Lo sentimos, la página que estás buscando no existe o ha sido movida. 
+      Puedes regresar al inicio o explorar nuestras encuestas.
+    </p>
+
+    <!-- Error code -->
+    <div class="inline-flex items-center px-4 py-2 bg-red-50 rounded-full text-red-700 font-semibold text-sm mb-8 border border-red-200">
+      <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+      </svg>
+      Error 404
+    </div>
+
+    <!-- Botones de acción -->
+    <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+      <a href="{{ '/' | relative_url }}" 
+         class="inline-flex items-center px-8 py-4 bg-gradient-to-r from-blue-600 to-blue-700 text-white font-bold text-lg rounded-2xl shadow-lg hover:from-blue-700 hover:to-blue-800 transform hover:scale-105 transition-all duration-300">
+        <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/>
+        </svg>
+        Ir al Inicio
+      </a>
+
+      <a href="{{ '/encuestas/' | relative_url }}" 
+         class="inline-flex items-center px-6 py-4 bg-white border border-slate-300 text-slate-700 font-semibold text-lg rounded-2xl hover:bg-slate-50 transition-all duration-300 shadow-md hover:shadow-lg">
+        <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
+        </svg>
+        Ver Encuestas
+      </a>
+    </div>
+
+    <!-- Enlaces útiles -->
+    <div class="mt-12 pt-8 border-t border-slate-200">
+      <p class="text-slate-500 text-sm mb-4">Enlaces útiles:</p>
+      <div class="flex flex-wrap justify-center gap-4">
+        <a href="{{ '/' | relative_url }}" class="text-blue-600 hover:text-blue-700 text-sm font-medium hover:underline">
+          Inicio
+        </a>
+        <a href="{{ '/encuestas/' | relative_url }}" class="text-blue-600 hover:text-blue-700 text-sm font-medium hover:underline">
+          Todas las Encuestas
+        </a>
+        <a href="{{ '/about/' | relative_url }}" class="text-blue-600 hover:text-blue-700 text-sm font-medium hover:underline">
+          Acerca de
+        </a>
+        <a href="{{ '/videos/' | relative_url }}" class="text-blue-600 hover:text-blue-700 text-sm font-medium hover:underline">
+          Videos
+        </a>
+      </div>
+    </div>
+  </div>
+</section>

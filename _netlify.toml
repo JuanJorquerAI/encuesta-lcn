@@ -1,0 +1,33 @@
+[build]
+  command = "bundle exec jekyll build"
+  publish = "_site"
+
+[build.environment]
+  RUBY_VERSION = "3.1.0"
+  BUNDLE_VERSION = "2.4.22"
+
+# Configuración para Jekyll
+[context.production]
+  command = "JEKYLL_ENV=production bundle exec jekyll build"
+
+[context.deploy-preview]
+  command = "bundle exec jekyll build"
+
+[context.branch-deploy]
+  command = "bundle exec jekyll build"
+
+# Redirects para evitar 404s
+[[redirects]]
+  from = "/encuestas/page/*"
+  to = "/encuestas/page/:splat"
+  status = 200
+  force = false
+
+# Headers de seguridad
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "DENY"
+    X-XSS-Protection = "1; mode=block"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"

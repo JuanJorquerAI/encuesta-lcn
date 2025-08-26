@@ -1,6 +1,6 @@
 {% comment %}
-=== NAVEGACIÓN DE PAGINACIÓN DINÁMICA ===
-Genera navegación responsiva y dinámica
+=== NAVEGACIÓN DE PAGINACIÓN ESTÁTICA ===
+Genera navegación compatible con todos los sistemas de build
 Parámetros: pagina_actual, total_paginas
 {% endcomment %}
 
@@ -18,8 +18,36 @@ Parámetros: pagina_actual, total_paginas
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
               </svg>
             </a>
-          {% else %}
-            <a href="{{ '/encuestas/page/' | append: pagina_actual | minus: 1 | append: '/' | relative_url }}" 
+          {% elsif pagina_actual == 3 %}
+            <a href="{{ '/encuestas/page/2/' | relative_url }}" 
+               class="inline-flex items-center justify-center w-8 h-8 sm:w-10 sm:h-10 rounded-lg border border-slate-300 text-slate-700 hover:bg-slate-50 transition-all duration-200">
+              <svg class="w-3 h-3 sm:w-4 sm:h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+              </svg>
+            </a>
+          {% elsif pagina_actual == 4 %}
+            <a href="{{ '/encuestas/page/3/' | relative_url }}" 
+               class="inline-flex items-center justify-center w-8 h-8 sm:w-10 sm:h-10 rounded-lg border border-slate-300 text-slate-700 hover:bg-slate-50 transition-all duration-200">
+              <svg class="w-3 h-3 sm:w-4 sm:h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+              </svg>
+            </a>
+          {% elsif pagina_actual == 5 %}
+            <a href="{{ '/encuestas/page/4/' | relative_url }}" 
+               class="inline-flex items-center justify-center w-8 h-8 sm:w-10 sm:h-10 rounded-lg border border-slate-300 text-slate-700 hover:bg-slate-50 transition-all duration-200">
+              <svg class="w-3 h-3 sm:w-4 sm:h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+              </svg>
+            </a>
+          {% elsif pagina_actual == 6 %}
+            <a href="{{ '/encuestas/page/5/' | relative_url }}" 
+               class="inline-flex items-center justify-center w-8 h-8 sm:w-10 sm:h-10 rounded-lg border border-slate-300 text-slate-700 hover:bg-slate-50 transition-all duration-200">
+              <svg class="w-3 h-3 sm:w-4 sm:h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+              </svg>
+            </a>
+          {% elsif pagina_actual == 7 %}
+            <a href="{{ '/encuestas/page/6/' | relative_url }}" 
                class="inline-flex items-center justify-center w-8 h-8 sm:w-10 sm:h-10 rounded-lg border border-slate-300 text-slate-700 hover:bg-slate-50 transition-all duration-200">
               <svg class="w-3 h-3 sm:w-4 sm:h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
@@ -28,41 +56,135 @@ Parámetros: pagina_actual, total_paginas
           {% endif %}
         {% endif %}
 
-        <!-- Páginas numéricas -->
-        {% for i in (1..total_paginas) %}
-          {% if i == 1 %}
-            {% if pagina_actual == 1 %}
-              <span class="inline-flex items-center justify-center w-8 h-8 sm:w-10 sm:h-10 rounded-lg bg-blue-600 text-white font-semibold shadow-lg text-xs sm:text-sm">
-                1
-              </span>
-            {% else %}
-              <a href="{{ '/encuestas/' | relative_url }}" 
-                 class="inline-flex items-center justify-center w-8 h-8 sm:w-10 sm:h-10 rounded-lg border border-slate-300 text-slate-700 hover:bg-slate-50 transition-all duration-200 text-xs sm:text-sm">
-                1
-              </a>
-            {% endif %}
-          {% else %}
-            {% if i == pagina_actual %}
-              <span class="inline-flex items-center justify-center w-8 h-8 sm:w-10 sm:h-10 rounded-lg bg-blue-600 text-white font-semibold shadow-lg text-xs sm:text-sm">
-                {{ i }}
-              </span>
-            {% else %}
-              <a href="{{ '/encuestas/page/' | append: i | append: '/' | relative_url }}" 
-                 class="inline-flex items-center justify-center w-8 h-8 sm:w-10 sm:h-10 rounded-lg border border-slate-300 text-slate-700 hover:bg-slate-50 transition-all duration-200 text-xs sm:text-sm">
-                {{ i }}
-              </a>
-            {% endif %}
-          {% endif %}
-        {% endfor %}
+        <!-- Página 1 -->
+        {% if pagina_actual == 1 %}
+          <span class="inline-flex items-center justify-center w-8 h-8 sm:w-10 sm:h-10 rounded-lg bg-blue-600 text-white font-semibold shadow-lg text-xs sm:text-sm">
+            1
+          </span>
+        {% else %}
+          <a href="{{ '/encuestas/' | relative_url }}" 
+             class="inline-flex items-center justify-center w-8 h-8 sm:w-10 sm:h-10 rounded-lg border border-slate-300 text-slate-700 hover:bg-slate-50 transition-all duration-200 text-xs sm:text-sm">
+            1
+          </a>
+        {% endif %}
+
+        <!-- Página 2 -->
+        {% if pagina_actual == 2 %}
+          <span class="inline-flex items-center justify-center w-8 h-8 sm:w-10 sm:h-10 rounded-lg bg-blue-600 text-white font-semibold shadow-lg text-xs sm:text-sm">
+            2
+          </span>
+        {% else %}
+          <a href="{{ '/encuestas/page/2/' | relative_url }}" 
+             class="inline-flex items-center justify-center w-8 h-8 sm:w-10 sm:h-10 rounded-lg border border-slate-300 text-slate-700 hover:bg-slate-50 transition-all duration-200 text-xs sm:text-sm">
+            2
+          </a>
+        {% endif %}
+
+        <!-- Página 3 -->
+        {% if pagina_actual == 3 %}
+          <span class="inline-flex items-center justify-center w-8 h-8 sm:w-10 sm:h-10 rounded-lg bg-blue-600 text-white font-semibold shadow-lg text-xs sm:text-sm">
+            3
+          </span>
+        {% else %}
+          <a href="{{ '/encuestas/page/3/' | relative_url }}" 
+             class="inline-flex items-center justify-center w-8 h-8 sm:w-10 sm:h-10 rounded-lg border border-slate-300 text-slate-700 hover:bg-slate-50 transition-all duration-200 text-xs sm:text-sm">
+            3
+          </a>
+        {% endif %}
+
+        <!-- Página 4 -->
+        {% if pagina_actual == 4 %}
+          <span class="inline-flex items-center justify-center w-8 h-8 sm:w-10 sm:h-10 rounded-lg bg-blue-600 text-white font-semibold shadow-lg text-xs sm:text-sm">
+            4
+          </span>
+        {% else %}
+          <a href="{{ '/encuestas/page/4/' | relative_url }}" 
+             class="inline-flex items-center justify-center w-8 h-8 sm:w-10 sm:h-10 rounded-lg border border-slate-300 text-slate-700 hover:bg-slate-50 transition-all duration-200 text-xs sm:text-sm">
+            4
+          </a>
+        {% endif %}
+
+        <!-- Página 5 -->
+        {% if pagina_actual == 5 %}
+          <span class="inline-flex items-center justify-center w-8 h-8 sm:w-10 sm:h-10 rounded-lg bg-blue-600 text-white font-semibold shadow-lg text-xs sm:text-sm">
+            5
+          </span>
+        {% else %}
+          <a href="{{ '/encuestas/page/5/' | relative_url }}" 
+             class="inline-flex items-center justify-center w-8 h-8 sm:w-10 sm:h-10 rounded-lg border border-slate-300 text-slate-700 hover:bg-slate-50 transition-all duration-200 text-xs sm:text-sm">
+            5
+          </a>
+        {% endif %}
+
+        <!-- Página 6 -->
+        {% if pagina_actual == 6 %}
+          <span class="inline-flex items-center justify-center w-8 h-8 sm:w-10 sm:h-10 rounded-lg bg-blue-600 text-white font-semibold shadow-lg text-xs sm:text-sm">
+            6
+          </span>
+        {% else %}
+          <a href="{{ '/encuestas/page/6/' | relative_url }}" 
+             class="inline-flex items-center justify-center w-8 h-8 sm:w-10 sm:h-10 rounded-lg border border-slate-300 text-slate-700 hover:bg-slate-50 transition-all duration-200 text-xs sm:text-sm">
+            6
+          </a>
+        {% endif %}
+
+        <!-- Página 7 -->
+        {% if pagina_actual == 7 %}
+          <span class="inline-flex items-center justify-center w-8 h-8 sm:w-10 sm:h-10 rounded-lg bg-blue-600 text-white font-semibold shadow-lg text-xs sm:text-sm">
+            7
+          </span>
+        {% else %}
+          <a href="{{ '/encuestas/page/7/' | relative_url }}" 
+             class="inline-flex items-center justify-center w-8 h-8 sm:w-10 sm:h-10 rounded-lg border border-slate-300 text-slate-700 hover:bg-slate-50 transition-all duration-200 text-xs sm:text-sm">
+            7
+          </a>
+        {% endif %}
 
         <!-- Botón Siguiente -->
-        {% if pagina_actual < total_paginas %}
-          <a href="{{ '/encuestas/page/' | append: pagina_actual | plus: 1 | append: '/' | relative_url }}" 
-             class="inline-flex items-center justify-center w-8 h-8 sm:w-10 sm:h-10 rounded-lg border border-slate-300 text-slate-700 hover:bg-slate-50 transition-all duration-200">
-            <svg class="w-3 h-3 sm:w-4 sm:h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
-            </svg>
-          </a>
+        {% if pagina_actual < 7 %}
+          {% if pagina_actual == 1 %}
+            <a href="{{ '/encuestas/page/2/' | relative_url }}" 
+               class="inline-flex items-center justify-center w-8 h-8 sm:w-10 sm:h-10 rounded-lg border border-slate-300 text-slate-700 hover:bg-slate-50 transition-all duration-200">
+              <svg class="w-3 h-3 sm:w-4 sm:h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+              </svg>
+            </a>
+          {% elsif pagina_actual == 2 %}
+            <a href="{{ '/encuestas/page/3/' | relative_url }}" 
+               class="inline-flex items-center justify-center w-8 h-8 sm:w-10 sm:h-10 rounded-lg border border-slate-300 text-slate-700 hover:bg-slate-50 transition-all duration-200">
+              <svg class="w-3 h-3 sm:w-4 sm:h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+              </svg>
+            </a>
+          {% elsif pagina_actual == 3 %}
+            <a href="{{ '/encuestas/page/4/' | relative_url }}" 
+               class="inline-flex items-center justify-center w-8 h-8 sm:w-10 sm:h-10 rounded-lg border border-slate-300 text-slate-700 hover:bg-slate-50 transition-all duration-200">
+              <svg class="w-3 h-3 sm:w-4 sm:h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+              </svg>
+            </a>
+          {% elsif pagina_actual == 4 %}
+            <a href="{{ '/encuestas/page/5/' | relative_url }}" 
+               class="inline-flex items-center justify-center w-8 h-8 sm:w-10 sm:h-10 rounded-lg border border-slate-300 text-slate-700 hover:bg-slate-50 transition-all duration-200">
+              <svg class="w-3 h-3 sm:w-4 sm:h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+              </svg>
+            </a>
+          {% elsif pagina_actual == 5 %}
+            <a href="{{ '/encuestas/page/6/' | relative_url }}" 
+               class="inline-flex items-center justify-center w-8 h-8 sm:w-10 sm:h-10 rounded-lg border border-slate-300 text-slate-700 hover:bg-slate-50 transition-all duration-200">
+              <svg class="w-3 h-3 sm:w-4 sm:h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+              </svg>
+            </a>
+          {% elsif pagina_actual == 6 %}
+            <a href="{{ '/encuestas/page/7/' | relative_url }}" 
+               class="inline-flex items-center justify-center w-8 h-8 sm:w-10 sm:h-10 rounded-lg border border-slate-300 text-slate-700 hover:bg-slate-50 transition-all duration-200">
+              <svg class="w-3 h-3 sm:w-4 sm:h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+              </svg>
+            </a>
+          {% endif %}
         {% endif %}
       </div>
     </nav>
@@ -71,8 +193,8 @@ Parámetros: pagina_actual, total_paginas
     <div class="text-center mt-6">
       <div class="inline-flex items-center px-3 py-1 bg-slate-100 rounded-full">
         <span class="text-slate-600 text-xs sm:text-sm">
-          Página <span class="font-semibold">{{ pagina_actual }}</span> de <span class="font-semibold">{{ total_paginas }}</span>
-          ({{ total_encuestas }} encuestas en total)
+          Página <span class="font-semibold">{{ pagina_actual }}</span> de <span class="font-semibold">7</span>
+          (28 encuestas en total)
         </span>
       </div>
     </div>
