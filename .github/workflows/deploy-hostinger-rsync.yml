@@ -17,13 +17,14 @@ jobs:
       uses: ruby/setup-ruby@v1
       with:
         ruby-version: '3.1'
-        bundler-cache: true
 
-    - name: Añadir plataforma para compatibilidad
-      run: bundle lock --add-platform x86_64-linux
-        
+    - name: Instalar dependencias
+      run: |
+        bundle lock --add-platform x86_64-linux
+        bundle install --jobs 4 --retry 3
+
     - name: Construir sitio Jekyll
-      run: bundle install && bundle exec jekyll build
+      run: bundle exec jekyll build
         
     - name: Configurar SSH
       uses: webfactory/ssh-agent@v0.8.0
