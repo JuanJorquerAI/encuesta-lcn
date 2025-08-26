@@ -67,10 +67,10 @@ permalink: /encuestas/page/3/
       </nav>
     </div>
 
-    <!-- Grid responsivo MEJORADO - PÁGINA 3 (encuestas 9-12) -->
+    <!-- Grid responsivo MEJORADO - PÁGINA 3 -->
     <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-      {% assign encuestas_pagina_3 = todas_encuestas_ordenadas | slice: 8, 4 %}
-      {% for encuesta in encuestas_pagina_3 %}
+      {% assign pagina3_encuestas = todas_encuestas_ordenadas | slice: 8, 4 %}
+      {% for encuesta in pagina3_encuestas %}
         {% include card-encuesta.html encuesta=encuesta %}
       {% endfor %}
     </div>
@@ -78,4 +78,4 @@ permalink: /encuestas/page/3/
 </section>
 
 <!-- Paginación principal -->
-{% include pagination-nav.html pagina_actual=3 total_paginas=7 %>
+{% include pagination-nav.html pagina_actual=3 total_paginas=7 %}
