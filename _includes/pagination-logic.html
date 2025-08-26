@@ -1,0 +1,55 @@
+{% comment %}
+=== LÓGICA DE PAGINACIÓN CENTRALIZADA ===
+Este include maneja toda la lógica de ordenamiento y paginación
+Parámetros esperados: pagina_actual (número de página)
+{% endcomment %}
+
+{% assign pagina_actual = include.pagina_actual | default: 1 %}
+{% assign por_pagina = 4 %}
+
+<!-- Sistema de ordenamiento numérico optimizado -->
+{% assign todas_encuestas = site.encuestas %}
+{% assign encuestas_numeradas = "" | split: "" %}
+
+{% for encuesta in todas_encuestas %}
+  {% assign titulo = encuesta.title %}
+  {% assign numero_extraido = "00" %}
+  
+  <!-- Extracción optimizada del número -->
+  {% for i in (1..28) %}
+    {% assign numero_string = i | append: "ª" %}
+    {% assign numero_alt_string = i | append: "°" %}
+    
+    {% if titulo contains numero_string or titulo contains numero_alt_string %}
+      {% if i < 10 %}
+        {% assign numero_extraido = "0" | append: i %}
+      {% else %}
+        {% assign numero_extraido = i | append: "" %}
+      {% endif %}
+      {% break %}
+    {% endif %}
+  {% endfor %}
+  
+  {% assign encuesta_con_numero = numero_extraido | append: "|" | append: forloop.index0 %}
+  {% assign encuestas_numeradas = encuestas_numeradas | push: encuesta_con_numero %}
+{% endfor %}
+
+<!-- Ordenamiento y paginación -->
+{% assign encuestas_numeradas_ordenadas = encuestas_numeradas | sort | reverse %}
+{% assign todas_encuestas_ordenadas = "" | split: "" %}
+
+{% for item in encuestas_numeradas_ordenadas %}
+  {% assign partes = item | split: "|" %}
+  {% assign indice = partes[1] | plus: 0 %}
+  {% assign encuesta = todas_encuestas[indice] %}
+  {% assign todas_encuestas_ordenadas = todas_encuestas_ordenadas | push: encuesta %}
+{% endfor %}
+
+<!-- Cálculos de paginación -->
+{% assign total_encuestas = todas_encuestas_ordenadas.size %}
+{% assign total_paginas = total_encuestas | divided_by: por_pagina.0 | ceil %}
+{% assign inicio_index = pagina_actual | minus: 1 | times: por_pagina %}
+{% assign fin_index = inicio_index | plus: por_pagina | minus: 1 %}
+
+<!-- Variables globales disponibles después de incluir este archivo -->
+<!-- pagina_actual, por_pagina, total_encuestas, total_paginas, inicio_index, fin_index, todas_encuestas_ordenadas -->

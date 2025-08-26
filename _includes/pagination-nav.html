@@ -1,0 +1,80 @@
+{% comment %}
+=== NAVEGACIÓN DE PAGINACIÓN DINÁMICA ===
+Genera navegación responsiva y dinámica
+Parámetros: pagina_actual, total_paginas
+{% endcomment %}
+
+<section class="py-8 bg-white border-t border-slate-200">
+  <div class="container max-w-4xl mx-auto px-6">
+    <nav class="flex items-center justify-center">
+      <div class="flex items-center space-x-1 sm:space-x-2">
+        
+        <!-- Botón Anterior -->
+        {% if pagina_actual > 1 %}
+          {% if pagina_actual == 2 %}
+            <a href="{{ '/encuestas/' | relative_url }}" 
+               class="inline-flex items-center justify-center w-8 h-8 sm:w-10 sm:h-10 rounded-lg border border-slate-300 text-slate-700 hover:bg-slate-50 transition-all duration-200">
+              <svg class="w-3 h-3 sm:w-4 sm:h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+              </svg>
+            </a>
+          {% else %}
+            <a href="{{ '/encuestas/page/' | append: pagina_actual | minus: 1 | append: '/' | relative_url }}" 
+               class="inline-flex items-center justify-center w-8 h-8 sm:w-10 sm:h-10 rounded-lg border border-slate-300 text-slate-700 hover:bg-slate-50 transition-all duration-200">
+              <svg class="w-3 h-3 sm:w-4 sm:h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+              </svg>
+            </a>
+          {% endif %}
+        {% endif %}
+
+        <!-- Páginas numéricas -->
+        {% for i in (1..total_paginas) %}
+          {% if i == 1 %}
+            {% if pagina_actual == 1 %}
+              <span class="inline-flex items-center justify-center w-8 h-8 sm:w-10 sm:h-10 rounded-lg bg-blue-600 text-white font-semibold shadow-lg text-xs sm:text-sm">
+                1
+              </span>
+            {% else %}
+              <a href="{{ '/encuestas/' | relative_url }}" 
+                 class="inline-flex items-center justify-center w-8 h-8 sm:w-10 sm:h-10 rounded-lg border border-slate-300 text-slate-700 hover:bg-slate-50 transition-all duration-200 text-xs sm:text-sm">
+                1
+              </a>
+            {% endif %}
+          {% else %}
+            {% if i == pagina_actual %}
+              <span class="inline-flex items-center justify-center w-8 h-8 sm:w-10 sm:h-10 rounded-lg bg-blue-600 text-white font-semibold shadow-lg text-xs sm:text-sm">
+                {{ i }}
+              </span>
+            {% else %}
+              <a href="{{ '/encuestas/page/' | append: i | append: '/' | relative_url }}" 
+                 class="inline-flex items-center justify-center w-8 h-8 sm:w-10 sm:h-10 rounded-lg border border-slate-300 text-slate-700 hover:bg-slate-50 transition-all duration-200 text-xs sm:text-sm">
+                {{ i }}
+              </a>
+            {% endif %}
+          {% endif %}
+        {% endfor %}
+
+        <!-- Botón Siguiente -->
+        {% if pagina_actual < total_paginas %}
+          <a href="{{ '/encuestas/page/' | append: pagina_actual | plus: 1 | append: '/' | relative_url }}" 
+             class="inline-flex items-center justify-center w-8 h-8 sm:w-10 sm:h-10 rounded-lg border border-slate-300 text-slate-700 hover:bg-slate-50 transition-all duration-200">
+            <svg class="w-3 h-3 sm:w-4 sm:h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+            </svg>
+          </a>
+        {% endif %}
+      </div>
+    </nav>
+
+    <!-- Información de paginación -->
+    <div class="text-center mt-6">
+      <div class="inline-flex items-center px-3 py-1 bg-slate-100 rounded-full">
+        <span class="text-slate-600 text-xs sm:text-sm">
+          Página <span class="font-semibold">{{ pagina_actual }}</span> de <span class="font-semibold">{{ total_paginas }}</span>
+          ({{ total_encuestas }} encuestas en total)
+        </span>
+      </div>
+    </div>
+  </div>
+</section>
