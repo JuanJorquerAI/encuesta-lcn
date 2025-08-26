@@ -7,7 +7,7 @@ Parámetros esperados: pagina_actual (número de página)
 {% assign pagina_actual = include.pagina_actual | default: 1 %}
 {% assign por_pagina = 4 %}
 
-<!-- Sistema de ordenamiento numérico optimizado -->
+<!-- Sistema de ordenamiento numérico COMPATIBLE -->
 {% assign todas_encuestas = site.encuestas %}
 {% assign encuestas_numeradas = "" | split: "" %}
 
@@ -15,20 +15,64 @@ Parámetros esperados: pagina_actual (número de página)
   {% assign titulo = encuesta.title %}
   {% assign numero_extraido = "00" %}
   
-  <!-- Extracción optimizada del número -->
-  {% for i in (1..28) %}
-    {% assign numero_string = i | append: "ª" %}
-    {% assign numero_alt_string = i | append: "°" %}
-    
-    {% if titulo contains numero_string or titulo contains numero_alt_string %}
-      {% if i < 10 %}
-        {% assign numero_extraido = "0" | append: i %}
-      {% else %}
-        {% assign numero_extraido = i | append: "" %}
-      {% endif %}
-      {% break %}
-    {% endif %}
-  {% endfor %}
+  <!-- Extracción optimizada y compatible del número -->
+  {% if titulo contains "28" %}
+    {% assign numero_extraido = "28" %}
+  {% elsif titulo contains "27" %}
+    {% assign numero_extraido = "27" %}
+  {% elsif titulo contains "26" %}
+    {% assign numero_extraido = "26" %}
+  {% elsif titulo contains "25" %}
+    {% assign numero_extraido = "25" %}
+  {% elsif titulo contains "24" %}
+    {% assign numero_extraido = "24" %}
+  {% elsif titulo contains "23" %}
+    {% assign numero_extraido = "23" %}
+  {% elsif titulo contains "22" %}
+    {% assign numero_extraido = "22" %}
+  {% elsif titulo contains "21" %}
+    {% assign numero_extraido = "21" %}
+  {% elsif titulo contains "20" %}
+    {% assign numero_extraido = "20" %}
+  {% elsif titulo contains "19" %}
+    {% assign numero_extraido = "19" %}
+  {% elsif titulo contains "18" %}
+    {% assign numero_extraido = "18" %}
+  {% elsif titulo contains "17" %}
+    {% assign numero_extraido = "17" %}
+  {% elsif titulo contains "16" %}
+    {% assign numero_extraido = "16" %}
+  {% elsif titulo contains "15" %}
+    {% assign numero_extraido = "15" %}
+  {% elsif titulo contains "14" %}
+    {% assign numero_extraido = "14" %}
+  {% elsif titulo contains "13" %}
+    {% assign numero_extraido = "13" %}
+  {% elsif titulo contains "12" %}
+    {% assign numero_extraido = "12" %}
+  {% elsif titulo contains "11" %}
+    {% assign numero_extraido = "11" %}
+  {% elsif titulo contains "10" %}
+    {% assign numero_extraido = "10" %}
+  {% elsif titulo contains "9" %}
+    {% assign numero_extraido = "09" %}
+  {% elsif titulo contains "8" %}
+    {% assign numero_extraido = "08" %}
+  {% elsif titulo contains "7" %}
+    {% assign numero_extraido = "07" %}
+  {% elsif titulo contains "6" %}
+    {% assign numero_extraido = "06" %}
+  {% elsif titulo contains "5" %}
+    {% assign numero_extraido = "05" %}
+  {% elsif titulo contains "4" %}
+    {% assign numero_extraido = "04" %}
+  {% elsif titulo contains "3" %}
+    {% assign numero_extraido = "03" %}
+  {% elsif titulo contains "2" %}
+    {% assign numero_extraido = "02" %}
+  {% elsif titulo contains "1" %}
+    {% assign numero_extraido = "01" %}
+  {% endif %}
   
   {% assign encuesta_con_numero = numero_extraido | append: "|" | append: forloop.index0 %}
   {% assign encuestas_numeradas = encuestas_numeradas | push: encuesta_con_numero %}
@@ -47,7 +91,7 @@ Parámetros esperados: pagina_actual (número de página)
 
 <!-- Cálculos de paginación -->
 {% assign total_encuestas = todas_encuestas_ordenadas.size %}
-{% assign total_paginas = total_encuestas | divided_by: por_pagina.0 | ceil %}
+{% assign total_paginas = total_encuestas | divided_by: 4.0 | ceil %}
 {% assign inicio_index = pagina_actual | minus: 1 | times: por_pagina %}
 {% assign fin_index = inicio_index | plus: por_pagina | minus: 1 %}
 
