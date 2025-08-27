@@ -11,7 +11,6 @@ permalink: /encuestas/
 ---
 
 <!-- Incluir lógica de paginación -->
-{% include pagination-logic.html pagina_actual=1 %}
 
 <!-- Header de la sección OPTIMIZADO -->
 <section class="py-12 bg-gradient-to-br from-slate-800 via-blue-900 to-slate-900 relative overflow-hidden">
@@ -52,7 +51,7 @@ permalink: /encuestas/
 
     <!-- Descripción -->
     <p class="text-lg text-blue-100/90 max-w-3xl mx-auto leading-relaxed mb-6">
-      Explora nuestro archivo completo de <span class="font-bold text-white">{{ total_encuestas }} encuestas profesionales</span> 
+      Explora nuestro archivo completo de <span class="font-bold text-white">{{ paginator.total_posts }} encuestas profesionales</span> 
       ordenadas numéricamente desde la más reciente
     </p>
 
@@ -64,7 +63,7 @@ permalink: /encuestas/
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
           </svg>
         </div>
-        <span class="text-xl font-bold text-white block">{{ total_encuestas }}</span>
+        <span class="text-xl font-bold text-white block">{{ paginator.total_posts }}</span>
         <span class="text-blue-200 text-xs">Encuestas</span>
       </div>
 
@@ -94,7 +93,7 @@ permalink: /encuestas/
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
           </svg>
         </div>
-        <span class="text-xl font-bold text-white block">{{ total_paginas }}</span>
+        <span class="text-xl font-bold text-white block">{{ paginator.total_pages }}</span>
         <span class="text-amber-200 text-xs">Páginas</span>
       </div>
     </div>
@@ -115,10 +114,10 @@ permalink: /encuestas/
       <!-- Información de página actual -->
       <div class="flex items-center space-x-3 mb-4 sm:mb-0">
         <div class="bg-white rounded-lg px-3 py-2 border border-slate-200 shadow-sm">
-          <span class="text-slate-600 text-sm">Página <span class="font-bold text-slate-900">{{ pagina_actual }}</span> de <span class="font-bold">{{ total_paginas }}</span></span>
+          <span class="text-slate-600 text-sm">Página <span class="font-bold text-slate-900">{{ paginator.page }}</span> de <span class="font-bold">{{ paginator.total_pages }}</span></span>
         </div>
         <div class="bg-blue-50 rounded-lg px-3 py-2 border border-blue-200">
-          <span class="text-blue-700 text-sm font-medium">{{ por_pagina }} encuestas</span>
+          <span class="text-blue-700 text-sm font-medium">{{ paginator.per_page }} encuestas por página</span>
         </div>
       </div>
 
@@ -136,8 +135,7 @@ permalink: /encuestas/
 
     <!-- Grid responsivo MEJORADO - PÁGINA 1 (primeras 4 encuestas) -->
     <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-      {% assign encuestas_pagina_1 = todas_encuestas_ordenadas | slice: 0, 4 %}
-      {% for encuesta in encuestas_pagina_1 %}
+      {% for encuesta in paginator.posts %}
         {% include card-encuesta.html encuesta=encuesta %}
       {% endfor %}
     </div>
@@ -155,4 +153,4 @@ permalink: /encuestas/
 </section>
 
 <!-- Paginación principal -->
-{% include pagination-nav.html pagina_actual=1 total_paginas=7 %}
+{% include pagination-nav.html %}
