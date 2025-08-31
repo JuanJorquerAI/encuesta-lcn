@@ -1,0 +1,34 @@
+# Configuración de videos para la página de videos
+# Puedes agregar, quitar o reordenar videos editando este archivo
+
+# Video principal destacado (se muestra en la sección hero)
+featured:
+  id: "pmun5vfTPk4"
+  title: "Último Análisis - Encuestas LCN"
+  description: "Presentación más reciente de nuestros resultados de encuestas"
+
+# Videos del archivo (se muestran en la grilla)
+archive:
+  - id: "wTUe_S7y-r8"
+    title: "Análisis de Encuesta LCN"
+    description: "Presentación de resultados"
+  - id: "usL0pctIyGE"
+    title: "Sesión de Análisis"
+    description: "Discusión de resultados de encuesta"
+
+# Configuración de la página
+page:
+  hero:
+    title: "Videos de Encuestas LCN"
+    subtitle: "Análisis detallados, presentaciones de resultados y discusiones sobre nuestras encuestas de opinión pública"
+    badge: "Contenido Audiovisual"
+  
+  featured_section:
+    title: "Último Análisis"
+    subtitle: "Presentación más reciente de nuestros resultados de encuestas"
+    badge: "Video Destacado"
+  
+  archive_section:
+    title: "Todos los Videos"
+    subtitle: "Explora nuestro archivo completo de análisis y presentaciones"
+    badge: "Archivo Completo"

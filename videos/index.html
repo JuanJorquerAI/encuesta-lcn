@@ -2,15 +2,173 @@
 layout: default
 title: Videos
 ---
-<section class="section container">
-  <h1>Videos de Encuestas LCN</h1>
-  <div class="grid-videos">
-    {% assign new_vids = "wTUe_S7y-r8,usL0pctIyGE" | split: ',' %}
-    {% assign survey_vids = site.encuestas | map: 'youtube_ids' | compact | flatten %}
-    {% assign all_vids = new_vids | concat: survey_vids | uniq %}
 
-    {% for id in all_vids %}
-      {% include youtube.html id=id %}
-    {% endfor %}
+<!-- Hero Section -->
+<section class="py-16 bg-gradient-to-br from-slate-800 via-blue-900 to-slate-900 relative overflow-hidden">
+  <!-- Efectos de fondo -->
+  <div class="absolute inset-0">
+    <div class="absolute top-10 left-10 w-64 h-64 bg-blue-500/10 rounded-full blur-3xl"></div>
+    <div class="absolute bottom-10 right-10 w-80 h-80 bg-white/5 rounded-full blur-3xl"></div>
+    <div class="absolute top-1/2 left-1/3 w-48 h-48 bg-blue-400/10 rounded-full blur-2xl"></div>
+  </div>
+
+  <!-- Patrón decorativo -->
+  <div class="absolute inset-0 opacity-5">
+    <div class="absolute inset-0" style="background-image: radial-gradient(circle at 2px 2px, white 1px, transparent 0); background-size: 40px 40px;"></div>
+  </div>
+
+  <div class="container max-w-6xl mx-auto px-6 text-center relative z-10">
+    <!-- Badge superior -->
+    <div class="inline-flex items-center px-6 py-3 bg-white/10 backdrop-blur-sm text-blue-100 rounded-full text-sm font-semibold mb-6 border border-white/20">
+      <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"/>
+      </svg>
+      {{ site.data.videos.page.hero.badge }}
+    </div>
+
+    <!-- Título principal -->
+    <h1 class="text-4xl md:text-5xl lg:text-6xl font-black tracking-tight mb-6">
+      <span class="bg-gradient-to-r from-white via-blue-100 to-white bg-clip-text text-transparent">
+        {{ site.data.videos.page.hero.title }}
+      </span>
+    </h1>
+
+    <!-- Descripción -->
+    <p class="text-lg text-blue-100/90 max-w-3xl mx-auto leading-relaxed mb-8">
+      {{ site.data.videos.page.hero.subtitle }}
+    </p>
+  </div>
+</section>
+
+<!-- Video Principal Destacado -->
+<section class="py-16 bg-gradient-to-b from-white via-slate-50 to-white relative overflow-hidden">
+  <!-- Efectos de fondo sutiles -->
+  <div class="absolute inset-0">
+    <div class="absolute top-20 left-10 w-72 h-72 bg-blue-500/3 rounded-full blur-3xl"></div>
+    <div class="absolute bottom-20 right-10 w-96 h-96 bg-slate-600/3 rounded-full blur-3xl"></div>
+  </div>
+
+  <div class="container max-w-6xl mx-auto px-6 relative">
+    <!-- Header de sección -->
+    <div class="text-center mb-12">
+      <div class="inline-flex items-center px-4 py-2 bg-red-600 text-white rounded-full text-sm font-semibold mb-6">
+        <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20">
+          <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
+        </svg>
+        {{ site.data.videos.page.featured_section.badge }}
+      </div>
+      <h2 class="text-3xl md:text-4xl font-bold text-slate-800 mb-4">{{ site.data.videos.page.featured_section.title }}</h2>
+      <p class="text-slate-600 max-w-2xl mx-auto">{{ site.data.videos.page.featured_section.subtitle }}</p>
+    </div>
+
+    <!-- Video Principal -->
+    <div class="max-w-4xl mx-auto">
+      <div class="relative bg-white rounded-3xl shadow-2xl overflow-hidden border border-slate-200">
+        <div class="aspect-video">
+          <iframe 
+            src="https://www.youtube-nocookie.com/embed/{{ site.data.videos.featured.id }}" 
+            title="{{ site.data.videos.featured.title }}" 
+            frameborder="0" 
+            allowfullscreen
+            class="w-full h-full">
+          </iframe>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Grid de Videos -->
+<section class="py-16 bg-gradient-to-b from-slate-50 to-white relative overflow-hidden">
+  <div class="container max-w-7xl mx-auto px-6">
+    <!-- Header de sección -->
+    <div class="text-center mb-16">
+      <div class="inline-flex items-center px-4 py-2 bg-slate-800 text-white rounded-full text-sm font-semibold mb-6">
+        <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"/>
+        </svg>
+        {{ site.data.videos.page.archive_section.badge }}
+      </div>
+      <h2 class="text-3xl md:text-4xl font-bold text-slate-800 mb-4">{{ site.data.videos.page.archive_section.title }}</h2>
+      <p class="text-slate-600 max-w-2xl mx-auto mb-8">{{ site.data.videos.page.archive_section.subtitle }}</p>
+    </div>
+
+    <!-- Grid responsivo de videos -->
+    <div class="container max-w-7xl mx-auto px-6">
+      <div class="grid gap-8 md:grid-cols-2 xl:grid-cols-3">
+        {% assign archive_vids = site.data.videos.archive | map: 'id' %}
+        {% assign survey_vids = site.encuestas | map: 'youtube_ids' | compact | flatten %}
+        {% assign all_vids = archive_vids | concat: survey_vids | uniq %}
+
+        {% for video in site.data.videos.archive %}
+        <div class="group">
+          <div class="bg-white rounded-2xl shadow-lg overflow-hidden border border-slate-200 hover:shadow-2xl hover:border-blue-300 transition-all duration-300 transform hover:-translate-y-1">
+            <!-- Video container -->
+            <div class="aspect-video relative overflow-hidden">
+              <iframe 
+                src="https://www.youtube-nocookie.com/embed/{{ video.id }}" 
+                title="{{ video.title }}" 
+                frameborder="0" 
+                allowfullscreen
+                class="w-full h-full group-hover:scale-105 transition-transform duration-300">
+              </iframe>
+            </div>
+            
+            <!-- Video info -->
+            <div class="p-6">
+              <h3 class="font-bold text-slate-800 mb-2 group-hover:text-blue-600 transition-colors duration-200">
+                {{ video.title }}
+              </h3>
+              <p class="text-slate-600 text-sm">
+                {{ video.description }}
+              </p>
+              
+              <!-- Link overlay -->
+              <a href="https://www.youtube.com/watch?v={{ video.id }}" 
+                 target="_blank" 
+                 rel="noopener noreferrer"
+                 class="absolute inset-0 z-10">
+                <span class="sr-only">Ver video en YouTube</span>
+              </a>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+
+        {% for id in survey_vids %}
+        <div class="group">
+          <div class="bg-white rounded-2xl shadow-lg overflow-hidden border border-slate-200 hover:shadow-2xl hover:border-blue-300 transition-all duration-300 transform hover:-translate-y-1">
+            <!-- Video container -->
+            <div class="aspect-video relative overflow-hidden">
+              <iframe 
+                src="https://www.youtube-nocookie.com/embed/{{ id }}" 
+                title="Video de Encuesta LCN" 
+                frameborder="0" 
+                allowfullscreen
+                class="w-full h-full group-hover:scale-105 transition-transform duration-300">
+              </iframe>
+            </div>
+            
+            <!-- Video info -->
+            <div class="p-6">
+              <h3 class="font-bold text-slate-800 mb-2 group-hover:text-blue-600 transition-colors duration-200">
+                Video de Encuesta
+              </h3>
+              <p class="text-slate-600 text-sm">
+                Análisis detallado de los resultados de la encuesta
+              </p>
+              
+              <!-- Link overlay -->
+              <a href="https://www.youtube.com/watch?v={{ id }}" 
+                 target="_blank" 
+                 rel="noopener noreferrer"
+                 class="absolute inset-0 z-10">
+                <span class="sr-only">Ver video en YouTube</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
   </div>
 </section>
