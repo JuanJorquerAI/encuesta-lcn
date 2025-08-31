@@ -1,6 +1,6 @@
 title: "Encuestas La Cosa Nostra"
 description: "Sitio institucional para publicar encuestas, histórico y videos."
-url: "" # Setear dominio de producción
+url: "https://www.encuestaslcn.cl/" # Setear dominio de producción
 baseurl: "" # Subcarpeta si aplica
 lang: es
 locale: es_ES
