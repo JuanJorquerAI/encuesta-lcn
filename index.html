@@ -3,14 +3,9 @@ layout: default
 title: Inicio
 ---
 <!-- Hero Section - Encuesta Destacada -->
-{% assign destacadas = site.encuestas | where: "destacado", true | sort: "date" | reverse %}
-{% if destacadas.size > 0 %}
-  {% include hero-encuesta.html encuesta=destacadas.first %}
-{% else %}
-  {% assign ultima = site.encuestas | sort: "date" | last %}
-  {% if ultima %}
-    {% include hero-encuesta.html encuesta=ultima %}
-  {% endif %}
+{% assign ultima_encuesta = site.encuestas | sort: 'date' | reverse | first %}
+{% if ultima_encuesta %}
+  {% include hero-encuesta.html encuesta=ultima_encuesta %}
 {% endif %}
 
 <!-- Encuestas Recientes -->

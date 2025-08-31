@@ -20,7 +20,11 @@
           {% if page == paginator.page %}
             <span class="inline-flex items-center justify-center w-8 h-8 sm:w-10 sm:h-10 rounded-lg bg-blue-600 text-white font-semibold shadow-lg text-xs sm:text-sm">{{ page }}</span>
           {% else %}
-            <a href="{{ paginator.page_path | replace: ':num', page | relative_url }}" class="inline-flex items-center justify-center w-8 h-8 sm:w-10 sm:h-10 rounded-lg border border-slate-300 text-slate-700 hover:bg-slate-50 transition-all duration-200 text-xs sm:text-sm">{{ page }}</a>
+            {% if page == 1 %}
+              <a href="{{ '/encuestas/' | relative_url }}" class="inline-flex items-center justify-center w-8 h-8 sm:w-10 sm:h-10 rounded-lg border border-slate-300 text-slate-700 hover:bg-slate-50 transition-all duration-200 text-xs sm:text-sm">{{ page }}</a>
+            {% else %}
+              <a href="{{ '/encuestas/page/' | append: page | append: '/' | relative_url }}" class="inline-flex items-center justify-center w-8 h-8 sm:w-10 sm:h-10 rounded-lg border border-slate-300 text-slate-700 hover:bg-slate-50 transition-all duration-200 text-xs sm:text-sm">{{ page }}</a>
+            {% endif %}
           {% endif %}
         {% endfor %}
 

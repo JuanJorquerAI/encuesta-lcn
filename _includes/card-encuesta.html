@@ -32,7 +32,7 @@
       <!-- Fecha elegante (REDUCIDA) -->
       <div class="flex items-center text-blue-200 text-xs">
         <span>🗓️</span>
-        <span class="font-medium">{{ e.date | date: "%d de %b, %Y" }}</span>
+        <span class="font-medium">{% include spanish-date-short.html date=e.date %}</span>
       </div>
     </div>
   </div>
