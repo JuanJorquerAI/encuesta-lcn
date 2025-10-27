@@ -1,0 +1,23 @@
+name: Permalink check
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Setup Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 3.1
+      - name: Install Bundler
+        run: gem install bundler -v 2.5.22
+      - name: Install dependencies
+        run: bundle install
+      - name: Run permalink check
+        run: bundle exec rake check:permalinks
