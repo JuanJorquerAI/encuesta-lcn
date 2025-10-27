@@ -56,7 +56,7 @@ bundle install
 
 ```bash
 # Servir localmente con recarga en vivo
-bundle exec jekyll serve --livereload --host 127.0.0.1 --port 4000
+/inform
 # Luego abrir http://127.0.0.1:4000
 
 # (Alternativa con Docker, si prefieres no tocar Ruby local)
