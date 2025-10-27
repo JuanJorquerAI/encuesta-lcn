@@ -1,0 +1,42 @@
+---
+layout: default
+title: "Informes"
+permalink: /informes/
+---
+
+<header class="page-header">
+  <h1>Informes</h1>
+  <p class="lead">Publicaciones e informes descargables</p>
+</header>
+
+{% assign informes = site.categories.informes | sort: 'date' | reverse %} {% if
+informes and informes.size > 0 %}
+<ul class="informes-list space-y-4">
+  {% for post in informes %}
+  <li class="bg-white p-4 rounded-lg shadow-sm">
+    <a
+      href="{{ post.url | relative_url }}"
+      class="text-lg font-semibold text-slate-800"
+      >{{ post.title }}</a
+    >
+    <div class="text-sm text-slate-500 mt-1">
+      {{ post.date | date: "%d %B %Y" }}
+    </div>
+    {% if post.pdf_url %}
+    <div class="mt-2">
+      <a
+        href="{{ post.pdf_url | relative_url }}"
+        class="text-blue-600 font-medium"
+        >Descargar PDF</a
+      >
+    </div>
+    {% endif %}
+    <p class="mt-2 text-slate-700">
+      {{ post.excerpt | strip_html | truncate: 200 }}
+    </p>
+  </li>
+  {% endfor %}
+</ul>
+{% else %}
+<p>No hay informes publicados todavía.</p>
+{% endif %}
