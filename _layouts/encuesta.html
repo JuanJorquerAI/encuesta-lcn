@@ -1,6 +1,7 @@
 ---
 layout: default
 ---
+
 <article class="section container encuesta-detail">
   <div class="encuesta-detail-body">
     <div class="encuesta-main-content">
@@ -9,40 +10,48 @@ layout: default
         <p class="muted">{{ page.date | date: "%B %-d, %Y" }}</p>
       </div>
 
-      {% if page.resumen %}
-        <section class="encuesta-summary">
-          <h2>Resumen</h2>
-          <p>{{ page.resumen }}</p>
-        </section>
+      {% assign resumen_text = page.resumen | default: page.excerpt | default:
+      page.description %} {% if resumen_text %}
+      <section class="encuesta-summary">
+        <h2>Resumen</h2>
+        <p>{{ resumen_text }}</p>
+      </section>
+      {% endif %} {% if page.youtube_ids %}
+      <section class="encuesta-videos">
+        <h2>Videos relacionados</h2>
+        <div class="grid-videos">
+          {% for id in page.youtube_ids %} {% include youtube.html id=id %} {%
+          endfor %}
+        </div>
+      </section>
       {% endif %}
 
-      {% if page.youtube_ids %}
-        <section class="encuesta-videos">
-          <h2>Videos relacionados</h2>
-          <div class="grid-videos">
-            {% for id in page.youtube_ids %}
-              {% include youtube.html id=id %}
-            {% endfor %}
-          </div>
-        </section>
-      {% endif %}
+      <!-- Render body/content of the markdown file in case the author placed additional text -->
+      <section class="encuesta-content mt-8">{{ content }}</section>
     </div>
 
     <aside class="encuesta-sidebar">
       {% if page.atributos or page.pdf_url %}
-        <div class="card">
-          <h3>Ficha Técnica</h3>
-          {% if page.atributos %}
-            <ul class="atributos">
-              {% for a in page.atributos %}<li>{{ a }}</li>{% endfor %}
-            </ul>
-          {% endif %}
-          {% if page.pdf_url %}
-            <a class="btn btn-primary" href="{{ page.pdf_url | relative_url }}" target="_blank" rel="noopener">Descargar PDF</a>
-          {% endif %}
-        </div>
+      <div class="card">
+        <h3>Ficha Técnica</h3>
+        {% if page.atributos %}
+        <ul class="atributos">
+          {% for a in page.atributos %}
+          <li>{{ a }}</li>
+          {% endfor %}
+        </ul>
+        {% endif %} {% if page.pdf_url %}
+        <a
+          class="btn btn-primary"
+          href="{{ page.pdf_url | relative_url }}"
+          target="_blank"
+          rel="noopener"
+          >Descargar PDF</a
+        >
+        {% endif %}
+      </div>
       {% endif %}
-      
+
       <div class="card share-card">
         <h3>Compartir</h3>
         {% include share.html %}
