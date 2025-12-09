@@ -1,16 +1,51 @@
 {% assign share_url = page.url | absolute_url %}
 {% assign share_title = page.title | uri_escape %}
+
+<style>
+.share-buttons {
+  display: inline-flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+.share-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 14px;
+  color: #fff;
+  font-size: 18px;
+  box-shadow: 0 10px 25px -12px rgba(0,0,0,0.35);
+  transition: transform 0.18s ease, box-shadow 0.18s ease, opacity 0.18s ease;
+}
+.share-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 30px -10px rgba(0,0,0,0.35);
+  opacity: 0.94;
+}
+.share-btn.twitter { background: linear-gradient(135deg, #0f1419, #111827); }
+.share-btn.facebook { background: linear-gradient(135deg, #1877f2, #0f5ad7); }
+.share-btn.linkedin { background: linear-gradient(135deg, #0a66c2, #094f97); }
+.share-btn.whatsapp { background: linear-gradient(135deg, #25d366, #1fb256); }
+</style>
+
 <div class="share-buttons">
-  <a href="https://twitter.com/intent/tweet?url={{ share_url }}&text={{ share_title }}" class="share-btn twitter" target="_blank" rel="noopener" aria-label="Compartir en X/Twitter">
+  <a href="https://twitter.com/intent/tweet?url={{ share_url }}&text={{ share_title }}"
+     class="share-btn twitter" target="_blank" rel="noopener" aria-label="Compartir en X/Twitter">
     <i class="fa-brands fa-x-twitter"></i>
   </a>
-  <a href="https://www.facebook.com/sharer/sharer.php?u={{ share_url }}" class="share-btn facebook" target="_blank" rel="noopener" aria-label="Compartir en Facebook">
+  <a href="https://www.facebook.com/sharer/sharer.php?u={{ share_url }}"
+     class="share-btn facebook" target="_blank" rel="noopener" aria-label="Compartir en Facebook">
     <i class="fa-brands fa-facebook-f"></i>
   </a>
-  <a href="https://www.linkedin.com/sharing/share-offsite/?url={{ share_url }}" class="share-btn linkedin" target="_blank" rel="noopener" aria-label="Compartir en LinkedIn">
+  <a href="https://www.linkedin.com/sharing/share-offsite/?url={{ share_url }}"
+     class="share-btn linkedin" target="_blank" rel="noopener" aria-label="Compartir en LinkedIn">
     <i class="fa-brands fa-linkedin-in"></i>
   </a>
-  <a href="https://api.whatsapp.com/send?text={{ share_title }}%20{{ share_url }}" class="share-btn whatsapp" target="_blank" rel="noopener" aria-label="Compartir en WhatsApp">
+  <a href="https://api.whatsapp.com/send?text={{ share_title }}%20{{ share_url }}"
+     class="share-btn whatsapp" target="_blank" rel="noopener" aria-label="Compartir en WhatsApp">
     <i class="fa-brands fa-whatsapp"></i>
   </a>
 </div>
