@@ -2,60 +2,143 @@
 layout: default
 ---
 
-<article class="section container encuesta-detail">
-  <div class="encuesta-detail-body">
-    <div class="encuesta-main-content">
-      <div class="encuesta-detail-header">
-        <h1>{{ page.title }}</h1>
-        <p class="muted">{{ page.date | date: "%B %-d, %Y" }}</p>
+{% assign resumen_text = page.resumen | default: page.excerpt | default: page.description %}
+
+<!-- Hero superior con CTA y datos clave -->
+<section class="relative overflow-hidden bg-gradient-to-br from-slate-900 via-blue-900 to-slate-950 text-white py-14 lg:py-18">
+  <div class="absolute inset-0 opacity-30 pointer-events-none">
+    <div class="absolute -left-10 top-8 w-72 h-72 bg-blue-500/30 rounded-full blur-3xl"></div>
+    <div class="absolute right-6 top-16 w-80 h-80 bg-sky-400/20 rounded-full blur-3xl"></div>
+    <div class="absolute left-1/2 -bottom-10 w-96 h-96 bg-indigo-500/20 rounded-full blur-3xl -translate-x-1/2"></div>
+  </div>
+
+  <div class="relative container max-w-6xl mx-auto px-6 lg:px-10">
+    <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-8">
+      <div class="space-y-4">
+        <p class="inline-flex items-center px-3 py-1 text-sm font-semibold bg-white/10 rounded-full backdrop-blur border border-white/10">
+          <svg class="w-4 h-4 mr-2 text-sky-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2v-7a2 2 0 00-2-2H5a2 2 0 00-2 2v7a2 2 0 002 2z"/>
+          </svg>
+          {{ page.date | date: "%-d de %B, %Y" }}
+        </p>
+
+        <h1 class="text-3xl md:text-4xl lg:text-5xl font-black leading-tight text-white">
+          {{ page.title }}
+        </h1>
+
+        {% if resumen_text %}
+        <p class="text-base md:text-lg text-slate-100/90 max-w-3xl">
+          {{ resumen_text }}
+        </p>
+        {% endif %}
+
+        <div class="flex flex-wrap gap-3">
+          {% if page.pdf_url %}
+          <a href="{{ page.pdf_url | relative_url }}" target="_blank" rel="noopener"
+             class="inline-flex items-center px-5 py-3 bg-gradient-to-r from-red-600 to-red-700 text-white font-semibold rounded-xl shadow-lg hover:shadow-xl hover:from-red-700 hover:to-red-800 transition-all duration-200">
+            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+            </svg>
+            Descargar PDF
+          </a>
+          {% endif %}
+
+          <a href="#analisis" class="inline-flex items-center px-5 py-3 bg-white/10 text-white font-semibold rounded-xl border border-white/20 hover:bg-white/20 transition-all duration-200">
+            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V4a2 2 0 10-4 0v1.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"/>
+            </svg>
+            Ver análisis
+          </a>
+        </div>
       </div>
 
-      {% assign resumen_text = page.resumen | default: page.excerpt | default:
-      page.description %} {% if resumen_text %}
-      <section class="encuesta-summary">
-        <h2>Resumen</h2>
-        <p>{{ resumen_text }}</p>
-      </section>
-      {% endif %} {% if page.youtube_ids %}
-      <section class="encuesta-videos">
-        <h2>Videos relacionados</h2>
-        <div class="grid-videos">
-          {% for id in page.youtube_ids %} {% include youtube.html id=id %} {%
-          endfor %}
-        </div>
-      </section>
-      {% endif %}
-
-      <!-- Render body/content of the markdown file in case the author placed additional text -->
-      <section class="encuesta-content mt-8">{{ content }}</section>
-    </div>
-
-    <aside class="encuesta-sidebar">
-      {% if page.atributos or page.pdf_url %}
-      <div class="card">
-        <h3>Ficha Técnica</h3>
-        {% if page.atributos %}
-        <ul class="atributos">
+      {% if page.atributos %}
+      <div class="bg-white/5 border border-white/10 rounded-2xl p-6 backdrop-blur shadow-xl w-full lg:w-80">
+        <h3 class="text-lg font-semibold text-white mb-4">Ficha rápida</h3>
+        <ul class="space-y-3 text-sm text-slate-100/90">
           {% for a in page.atributos %}
-          <li>{{ a }}</li>
+          <li class="flex items-start">
+            <span class="mt-1 mr-2 inline-block w-2 h-2 rounded-full bg-sky-300"></span>
+            <span>{{ a }}</span>
+          </li>
           {% endfor %}
         </ul>
-        {% endif %} {% if page.pdf_url %}
-        <a
-          class="btn btn-primary"
-          href="{{ page.pdf_url | relative_url }}"
-          target="_blank"
-          rel="noopener"
-          >Descargar PDF</a
-        >
+      </div>
+      {% endif %}
+    </div>
+  </div>
+</section>
+
+<!-- Contenido principal -->
+<section id="analisis" class="py-12 lg:py-16 bg-gradient-to-b from-slate-50 to-white">
+  <div class="container max-w-6xl mx-auto px-6 lg:px-10 grid lg:grid-cols-[2fr_1fr] gap-10 items-start">
+
+    <div class="space-y-8">
+      {% if resumen_text %}
+      <div class="bg-white rounded-2xl shadow-lg border border-slate-200/70 p-6">
+        <div class="flex items-center justify-between mb-4">
+          <div>
+            <p class="text-xs uppercase tracking-wide text-slate-500 font-semibold">Resumen ejecutivo</p>
+            <h2 class="text-2xl font-bold text-slate-900">Puntos clave</h2>
+          </div>
+        </div>
+        <p class="text-slate-700 leading-relaxed">
+          {{ resumen_text }}
+        </p>
+      </div>
+      {% endif %}
+
+      <div class="bg-white rounded-2xl shadow-lg border border-slate-200/70 p-6">
+        <div class="flex items-center justify-between mb-4">
+          <div>
+            <p class="text-xs uppercase tracking-wide text-slate-500 font-semibold">Análisis completo</p>
+            <h2 class="text-2xl font-bold text-slate-900">Detalle de la encuesta</h2>
+          </div>
+        </div>
+        <div class="prose max-w-none prose-slate">
+          {{ content }}
+        </div>
+      </div>
+
+      {% if page.youtube_ids %}
+      <div class="bg-white rounded-2xl shadow-lg border border-slate-200/70 p-6">
+        <h2 class="text-2xl font-bold text-slate-900 mb-4">Videos relacionados</h2>
+        <div class="grid gap-4 md:grid-cols-2">
+          {% for id in page.youtube_ids %}
+            {% include youtube.html id=id %}
+          {% endfor %}
+        </div>
+      </div>
+      {% endif %}
+    </div>
+
+    <aside class="space-y-6">
+      {% if page.atributos or page.pdf_url %}
+      <div class="bg-white rounded-2xl shadow-lg border border-slate-200/70 p-6">
+        <h3 class="text-lg font-bold text-slate-900 mb-4">Ficha Técnica</h3>
+        {% if page.atributos %}
+        <ul class="space-y-3 text-slate-700">
+          {% for a in page.atributos %}
+          <li class="flex items-start">
+            <span class="mt-1 mr-2 inline-block w-2 h-2 rounded-full bg-blue-500"></span>
+            <span>{{ a }}</span>
+          </li>
+          {% endfor %}
+        </ul>
+        {% endif %}
+        {% if page.pdf_url %}
+        <a href="{{ page.pdf_url | relative_url }}" target="_blank" rel="noopener"
+           class="mt-6 w-full inline-flex items-center justify-center px-4 py-3 bg-gradient-to-r from-red-600 to-red-700 text-white font-semibold rounded-xl shadow-md hover:shadow-lg hover:from-red-700 hover:to-red-800 transition-all duration-200">
+          Descargar PDF
+        </a>
         {% endif %}
       </div>
       {% endif %}
 
-      <div class="card share-card">
-        <h3>Compartir</h3>
+      <div class="bg-white rounded-2xl shadow-lg border border-slate-200/70 p-6">
+        <h3 class="text-lg font-bold text-slate-900 mb-4">Compartir</h3>
         {% include share.html %}
       </div>
     </aside>
   </div>
-</article>
+</section>
