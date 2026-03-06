@@ -84,6 +84,94 @@ title: Inicio
   </div>
 </section>
 
+<!-- Informes Recientes -->
+<section class="py-20 bg-gradient-to-b from-slate-100 via-white to-slate-100 relative overflow-hidden">
+  <div class="absolute inset-0 pointer-events-none">
+    <div class="absolute top-10 right-10 w-64 h-64 bg-blue-500/5 rounded-full blur-3xl"></div>
+    <div class="absolute bottom-10 left-10 w-72 h-72 bg-slate-700/5 rounded-full blur-3xl"></div>
+  </div>
+
+  <div class="container max-w-7xl mx-auto px-6 relative">
+    <div class="text-center mb-14">
+      <div class="inline-flex items-center px-4 py-2 bg-slate-900 text-white rounded-full text-sm font-semibold mb-6">
+        <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+        </svg>
+        Informes recientes
+      </div>
+      <h2 class="text-3xl md:text-4xl lg:text-5xl font-black tracking-tight mb-4">
+        <span class="bg-gradient-to-r from-slate-900 via-blue-900 to-slate-900 bg-clip-text text-transparent">
+          Informes y publicaciones
+        </span>
+      </h2>
+      <p class="text-lg text-slate-600 max-w-3xl mx-auto leading-relaxed">
+        Revisa nuestros últimos informes metodológicos y presentaciones oficiales con análisis en profundidad.
+      </p>
+    </div>
+
+    {% assign informes = site.categories.informes | sort: 'date' | reverse | slice: 0, 3 %}
+    {% if informes and informes.size > 0 %}
+      <div class="grid gap-6 md:grid-cols-3">
+        {% for post in informes %}
+          <article class="bg-white rounded-2xl shadow-lg overflow-hidden border border-slate-200/60 hover:border-blue-300/70 transform transition-all duration-300 hover:-translate-y-1 hover:shadow-xl">
+            <div class="p-6 pb-4">
+              <h3 class="text-lg font-bold text-slate-900 mb-2 line-clamp-2">
+                <a href="{{ post.url | relative_url }}" class="hover:text-blue-700 transition-colors">
+                  {{ post.title }}
+                </a>
+              </h3>
+              <time datetime="{{ post.date | date_to_xmlschema }}" class="text-sm text-slate-500 font-medium">
+                {{ post.date | date: "%-d de %B, %Y" }}
+              </time>
+            </div>
+
+            <div class="px-6 pb-6">
+              <p class="text-sm text-slate-600 mb-4 line-clamp-3">
+                {{ post.excerpt | strip_html | truncate: 150 }}
+              </p>
+              <div class="flex items-center space-x-3">
+                {% if post.pdf_url %}
+                  <a
+                    href="{{ post.pdf_url | relative_url }}"
+                    class="inline-flex items-center px-3 py-2 bg-blue-600 text-white text-xs font-semibold rounded-lg hover:bg-blue-700 transition-colors"
+                  >
+                    <svg class="w-4 h-4 mr-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+                    </svg>
+                    {% if post.pdf_url contains '.pptx' %}Descargar presentación{% else %}Descargar PDF{% endif %}
+                  </a>
+                {% endif %}
+                <a
+                  href="{{ post.url | relative_url }}"
+                  class="text-xs font-medium text-blue-700 hover:text-blue-900 transition-colors"
+                >
+                  Ver detalle →
+                </a>
+              </div>
+            </div>
+          </article>
+        {% endfor %}
+      </div>
+    {% else %}
+      <p class="text-center text-slate-500 text-sm">
+        Aún no hay informes publicados.
+      </p>
+    {% endif %}
+
+    <div class="mt-10 text-center">
+      <a
+        href="{{ '/informes/' | relative_url }}"
+        class="inline-flex items-center px-6 py-3 rounded-2xl bg-slate-900 text-white text-sm font-semibold shadow-lg hover:bg-blue-800 transition-all duration-300"
+      >
+        <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"/>
+        </svg>
+        Ver todos los informes
+      </a>
+    </div>
+  </div>
+</section>
+
 <!-- Call to Action - Histórico Completo -->
 <section class="py-24 bg-gradient-to-br from-slate-800 via-blue-900 to-slate-900 relative overflow-hidden">
   <!-- Efectos visuales de fondo -->
