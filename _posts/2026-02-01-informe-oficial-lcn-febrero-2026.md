@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Informe Oficial LCN — Febrero 2026"
-date: 2026-02-01
+date: 2026-03-06
 categories: [informes]
 tags: [informe, oficial, febrero2026, presentacion]
 pdf_url: "/assets/pdfs/Informe Oficial LCN Febrero 2026.pptx"
